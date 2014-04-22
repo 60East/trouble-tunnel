@@ -1,0 +1,21 @@
+[
+    {"name": "AB",
+       "listen_on":"8080",
+       "remote_addr":"www.google.com:80",
+        "log_dir":".",
+    },
+
+    {"name": "AC",
+       "listen_on":"9005",
+       "remote_addr":"C:9004",
+       "log_dir":".",
+        "filters": [
+          {"type":"Zero",
+           "description": "zeroing switch"},
+          {"type":"Wan",
+          "description": "transatlantic cable",
+          "median_latency":1},
+        ]
+    }
+
+]

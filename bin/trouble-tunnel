@@ -1,0 +1,16 @@
+#!/bin/bash
+HERE=`dirname $0`
+JAR=`find $HERE -type f -name trouble-tunnel.jar`
+JAR=`dirname $0`/../dist/trouble-tunnel.jar
+if [ -e "$JAR" ]; then
+    java -jar $JAR $*
+else
+    JAR=`dirname $0`/trouble-tunnel.jar
+fi
+
+if [ -e "$JAR" ]; then
+    java -jar $JAR $*
+else
+    echo "could not find trouble-tunnel.jar" 1>&2
+    exit 1
+fi

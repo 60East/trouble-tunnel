@@ -1,0 +1,167 @@
+<project name="TroubleTunnel" default="all" basedir=".">
+
+  <property name="version" value="1.0.0"/>
+
+  <property name="build" location="${basedir}/build"/>
+  <property name="results" location="${build}/results"/>
+  <property name="reports" location="${build}/reports"/>
+  <property name="classes" location="${build}/classes"/>
+  <property name="test-classes" location="${build}/test-classes"/>
+  <property name="src" location="${basedir}/src"/>
+  <property name="test-src" location="${basedir}/tests/"/>
+
+
+<target name="init">
+  <mkdir dir="${classes}"/>
+  <mkdir dir="${test-classes}"/>
+  <mkdir dir="${results}"/>
+  <mkdir dir="${reports}"/>
+</target>
+
+<path id="compile.path">
+  <fileset dir="${basedir}/lib">
+    <include name="commons-io-2.4.jar" />
+    <include name="json_simple-1.1.jar" />
+    <include name="log4j-1.2.17.jar" />
+  </fileset>
+</path>
+
+<target name="compile" depends="init">
+  <javac debug="true" debuglevel="lines,vars,source" includeantruntime="false"  srcdir="${src}" destdir="${classes}" classpathref="compile.path">
+    <compilerarg value="-Xlint:-path"/>
+    <compilerarg value="-Xlint:-unchecked"/>
+  </javac>
+</target>
+
+<path id="test.compile.path">
+  <fileset dir="${basedir}/tests/lib">
+    <include name="junit.jar"/>
+  </fileset>
+  <fileset dir="${basedir}/lib">
+    <include name="commons-io-2.4.jar" />
+    <include name="json_simple-1.1.jar" />
+  </fileset>
+  <pathelement location="${classes}"/>
+</path>
+
+
+<target name="test.compile" depends="compile">
+  <javac debug="true" debuglevel="lines,vars,source" includeantruntime="false"  srcdir="${test-src}" destdir="${test-classes}" classpathref="test.compile.path">
+    <compilerarg value="-Xlint:-path"/>
+    <compilerarg value="-Xlint:-unchecked"/>
+  </javac>
+</target>
+
+<path id="test.run.path">
+  <fileset dir="${basedir}/tests/lib">
+    <include name="*.jar"/>
+  </fileset>
+  <fileset dir="${basedir}/lib">
+    <include name="*.jar"/>
+  </fileset>
+  <pathelement location="${test-src}/lib/"/>
+  <pathelement location="${classes}"/>
+  <pathelement location="${test-classes}"/>
+</path>
+
+
+<target name="test" depends="test.compile">
+  <junit printsummary="true"
+         fork="true"
+         haltonfailure="false"
+         haltonerror="false"
+         showoutput="true">
+    <jvmarg value="-Xmx2048m"/>
+    <classpath refid="test.run.path"/>
+    <formatter type="xml"/>
+    <batchtest fork="true" todir="${results}">
+      <fileset dir="${test-classes}">
+        <exclude name="**/MockConnectionProcessor.class"/>
+        <exclude name="**/ConfigParserTest$1.class"/>
+      </fileset>
+    </batchtest>
+  </junit>
+  <junitreport todir="${reports}">
+    <fileset dir="${results}">
+      <include name="TEST-*.xml"/>
+    </fileset>
+    <report format="frames" todir="${reports}" styledir="${test-src}/report-config"/>
+  </junitreport>
+  </target>
+
+
+
+  <target name="docs" depends="compile">
+    <delete dir="${build.apidocs}"/>
+    <mkdir dir="${build.apidocs}"/>
+    <javadoc destdir="${build.apidocs}"
+             windowtitle="TroubleTunnel"
+             doctitle="TroubleTunnel"
+             classpathref="compile.path"
+             additionalparam="-notimestamp -link http://docs.oracle.com/javase/1.5.0/docs/api/">
+      <packageset dir="src" defaultexcludes="yes">
+        <include name="**"/>
+      </packageset>
+    </javadoc>
+
+  </target>
+
+<property name="dist" value="${basedir}/trouble-tunnel-${version}"/>
+<property name="dist.jar" value="${dist}/trouble-tunnel.jar"/>
+<property name="build.apidocs" value="${build}/apidocs"/>
+
+  <target name="clean" >
+    <delete dir="${dist}"/>
+    <delete dir="${basedir}/out"/>
+    <delete dir="${basedir}/build"/>
+    <delete dir="${basedir}/dist"/>
+
+    <exec dir="${basedir}" executable="bash">
+      <arg value="-c"/>
+      <arg value="rm trouble-tunnel*.tgz"/>
+    </exec>
+
+  </target>
+
+<target name="dist" depends="compile, docs">
+  <!-- jar -->
+  <delete dir="${dist}"/>
+  <mkdir  dir="${dist}"/>
+  <move file="${build.apidocs}" todir="${dist}"/>
+
+  <exec dir="${basedir}" executable="bash">
+    <arg value="-c"/>
+    <arg value="cp ${basedir}/bin/trouble-tunnel ${dist}"/>
+  </exec>
+
+  <copy file="${basedir}/bin/trouble-tunnel" todir="${dist}"/>
+
+  <jar destfile="${dist.jar}">
+    <fileset dir="${src}" includes="log4j.properties"/>
+    <fileset dir="${classes}" includes="**/*.class"/>
+
+    <manifest>
+      <attribute name="Manifest-Version" value="1.0"/>
+      <attribute name="Specification-Version" value="1.0"/>
+      <attribute name="Implementation-Title" value="TroubleTunnel"/>
+      <attribute name="Implementation-Version" value="build57"/>
+      <attribute name="Implementation-Vendor" value="60East Technologies, Inc."/>
+      <attribute name="Main-Class" value="com.crankuptheamps.ttunnel.Main"/>
+      <!--<attribute name="Class-Path:" value="./log4j.properties"/>-->
+    </manifest>
+    <zipgroupfileset dir="${basedir}/lib" includes="*.jar" />
+  </jar>
+
+  <exec dir="${basedir}" executable="bash">
+    <arg value="-c"/>
+    <arg value="tar czf trouble-tunnel-${version}.tgz trouble-tunnel-${version}"/>
+  </exec>
+
+  <move file="trouble-tunnel-${version}" tofile="dist"/>
+
+</target>
+
+  <target name="all" depends="clean, dist, test"/>
+
+
+</project>
