@@ -1,12 +1,5 @@
 package com.crankuptheamps.ttunnel;
 
-/**
- * Created with IntelliJ IDEA.
- * User: gibbs
- * Date: 4/22/14
- * Time: 2:46 PM
- * To change this template use File | Settings | File Templates.
- */
 public class StringUtils {
     public static String join(final String[] args, final String delimiter) {
         final StringBuffer sb = new StringBuffer();

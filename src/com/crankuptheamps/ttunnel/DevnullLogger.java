@@ -1,12 +1,5 @@
 package com.crankuptheamps.ttunnel;
 
-/**
- * Created with IntelliJ IDEA.
- * User: gibbs
- * Date: 4/22/14
- * Time: 1:55 PM
- * To change this template use File | Settings | File Templates.
- */
 public class DevnullLogger implements ConnectionLogger {
 
     private final String name;

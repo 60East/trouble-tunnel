@@ -23,7 +23,12 @@ public class ConnectionProcessorPipe implements ConnectionProcessor, Runnable {
 
     @Override
     public void disconnect(){
+        try {
+            instream.close();
+            outstream.close();
+        } catch(IOException e) {
 
+        }
     }
 
     public void pause() {

@@ -61,7 +61,7 @@ public class ConnectionProcessorImpl implements Runnable, ConnectionProcessor {
         }
     }
 
-    public void disconnect() throws IOException {
+    public void disconnect() {
         for (ConnectionProcessor pipe : pipes) {
             pipe.disconnect();
         }

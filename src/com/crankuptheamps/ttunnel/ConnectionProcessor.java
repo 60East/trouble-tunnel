@@ -6,7 +6,7 @@ import java.util.Properties;
 
 public interface ConnectionProcessor {
 
-    public void disconnect() throws IOException;
+    public void disconnect();
 
     public void pause();
 
