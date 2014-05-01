@@ -21,7 +21,6 @@ public class WanFilter extends Filter {
 
     private final long medianLatency;
     private final String medianLatencyKey = "median_latency";
-    private final Random r = new Random(System.currentTimeMillis());
 
     public WanFilter(final ConnectionProcessor proc, final Properties props) {
         super(proc, props);

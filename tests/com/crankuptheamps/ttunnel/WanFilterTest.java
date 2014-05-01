@@ -29,12 +29,4 @@ public class WanFilterTest {
         Assert.assertTrue(Math.abs(target_median-median) < margin_of_error);
     }
 
-    @Test
-    public void testSimplex() {
-        Properties first = new Properties();
-        first.setProperty("name", "first");
-        Properties second = new Properties(first);
-        Assert.assertEquals(second.getProperty("name"), "first");
-    }
-
 }
