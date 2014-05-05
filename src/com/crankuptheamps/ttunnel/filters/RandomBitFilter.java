@@ -11,18 +11,22 @@ public class RandomBitFilter extends Filter {
 
     private final Random r = new Random(System.currentTimeMillis());
     private final float probability;
-    private final int[][] table = new int[256][8];
+    private static final int[][] table = new int[256][8];
     public static final String probability_key = "probability";
 
-    public RandomBitFilter(final ConnectionProcessor proc, final Properties props) {
-        super(proc, props);
-        requireConfigKey(probability_key);
-        probability = Float.parseFloat(props.getProperty(probability_key));
+    static {
         for (int i = 0 ; i < table.length ; ++i) {
             for (int j = 24 ; j < 32 ; ++j) {
                 table[i][j-24] = flip_bit_at(i, j);
             }
         }
+    }
+
+    public RandomBitFilter(final ConnectionProcessor proc, final Properties props) {
+        super(proc, props);
+        requireConfigKey(probability_key);
+        probability = Float.parseFloat(props.getProperty(probability_key));
+
     }
 
     public int filter(final int datum) {
@@ -45,7 +49,7 @@ public class RandomBitFilter extends Filter {
         return len;
     }
 
-    int[][] get_table_copy_for_unit_testing() {
+    static int[][] get_table_copy_for_unit_testing() {
         final int[][] t = new int[table.length][table[0].length];
         for (int i = 0 ; i < t.length ; ++i) {
             t[i] = Arrays.copyOfRange(table[i], 0, table[i].length);
@@ -68,4 +72,5 @@ public class RandomBitFilter extends Filter {
         }
         return s;
     }
+
 }
