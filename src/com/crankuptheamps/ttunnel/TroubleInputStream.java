@@ -19,13 +19,13 @@ public class TroubleInputStream extends FilterInputStream {
 
     @Override
     public int read() throws IOException {
-        int val = super.read();
-        if (val != -1 && hasFilters) {
+        int ret = super.read();
+        if (ret != -1 && hasFilters) {
             for (int i = 0; i < filters.length; ++i) {
-                val = filters[i].filter(val);
+                ret = filters[i].filter(ret);
             }
         }
-        return val;
+        return ret;
     }
 
     public int read(byte[] b, int off, int len) throws IOException {
@@ -40,13 +40,13 @@ public class TroubleInputStream extends FilterInputStream {
 
     @Override
     public int read(byte[] b) throws IOException {
-        int len = super.read(b);
-        if (len != -1 && hasFilters) {
+        int ret = super.read(b);
+        if (ret != -1 && hasFilters) {
             for (int i = 0; i < filters.length; ++i) {
-                len = filters[i].filter(b, 0, len);
+                ret = filters[i].filter(b, 0, ret);
             }
         }
-        return len;
+        return ret;
     }
 
 }

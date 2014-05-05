@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Properties;
 
 
-class MockConnectionProcessor implements ConnectionProcessor {
+public class MockConnectionProcessor implements ConnectionProcessor {
 
     public int disconnect_count, pause_count, pause_egress_count;
     public int pause_ingress_count, start_logging_count, stop_logging_count;

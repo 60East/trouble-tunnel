@@ -15,8 +15,21 @@ public abstract class Filter {
         this.config = config;
     }
 
+    /**
+     * @param datum the next byte of data from the input stream.
+     *              0 <= datum <= 255.
+     *
+     * @return the next byte of filtered data
+     */
     public abstract int filter(int datum);
 
+    /**
+     *
+     * @param b     the buffer into which the data has been read
+     * @param off   the start offset in array b at which the data was written
+     * @param len   the number of bytes that were read, len >= 0
+     * @return      the number of bytes that were read
+     */
     public abstract int filter(byte[] b, int off, int len);
 
     protected ConnectionProcessor getConnectionProcessor() {
