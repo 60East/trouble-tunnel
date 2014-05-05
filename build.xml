@@ -76,7 +76,9 @@
     <formatter type="xml"/>
     <batchtest fork="true" todir="${results}">
       <fileset dir="${test-classes}">
+        <include name="**/*Test.class"/>
         <exclude name="**/MockConnectionProcessor.class"/>
+        <exclude name="**/ConfigParserTest$1.class"/>
         <exclude name="**/ConfigParserTest$1.class"/>
       </fileset>
     </batchtest>
