@@ -36,7 +36,7 @@ Building TT
 ===========
 
 TT requires:
-o Java 1.5 or later
+o Java 1.6 or later
 o ant
 
 Clone the TT repository, navigate to the root directory, and type
