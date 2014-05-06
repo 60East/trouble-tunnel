@@ -22,9 +22,9 @@ Great, How Does It Work?
 TroubleTunnel is socket proxy that you can configure for various levels of 
 latency and reliability. To use TT:
 
-o Create a configuration file.
-o Start TT. TT begins listening on the ports you configured.
-o Connect your application to TT.
++ Create a configuration file.
++ Start TT. TT begins listening on the ports you configured.
++ Connect your application to TT.
 
 
 TT connects to the destination endpoint and proxies network traffic between your
@@ -36,8 +36,8 @@ Building TT
 ===========
 
 TT requires:
-o Java 1.6 or later
-o ant
++ Java 1.6 or later
++ ant
 
 Clone the TT repository, navigate to the root directory, and type
 
@@ -69,11 +69,11 @@ Configuring TT
 TT uses JSON-format files for configuration.  Each entry in the JSON file
 defines a *route*. A route is:
 
-o The local port for TT to listen on.
-o The remote host and port for TT to forward network traffic to.
-o Filters for TT to apply to traffic on the route. Filters are how TT causes
++ The local port for TT to listen on.
++ The remote host and port for TT to forward network traffic to.
++ Filters for TT to apply to traffic on the route. Filters are how TT causes
   trouble.
-o Logging for TT to use.
++ Where to keep the log files for the route.
 
 Here's an example configuration file that contains two routes:
 
@@ -85,7 +85,7 @@ Here's an example configuration file that contains two routes:
 ````
 
 The first route, `here->B`, routes traffic from `localhost:9004` to `B:9004`.
-The route logs to the directory `log-2B'. The route applies a single filter,
+The route logs to the directory `log-2B`. The route applies a single filter,
 the `wan` filter, and sets a parameter on the filter.
 
 The second route, `here->C`, routes traffic from `localhost:9005` to `C:9004`.
@@ -111,22 +111,22 @@ you do!)
 
 These are the filters that come with TT:
 
-o Chaotic: This filter adds a random amount of latency from between 0 to 1000
++ Chaotic: This filter adds a random amount of latency from between 0 to 1000
   milliseconds.
-o Disconnect: This filter randomly disconnects. The filter takes two
++ Disconnect: This filter randomly disconnects. The filter takes two
   parameters.
-  o `min_uptime` the minimum amount of time before disconnecting, in
+  - `min_uptime` the minimum amount of time before disconnecting, in
      milliseconds.
-  o `max_uptime` the maximum amount of time without disconnecting, in
+  - `max_uptime` the maximum amount of time without disconnecting, in
     milliseconds.
-o RandomBit: Randomly flips a bit in packets traveling through TT.
-  o `probability` the likelihood of flipping a bit
-o RandomByte: Replaces bytes in the packets traveling through TT with random
++ RandomBit: Randomly flips a bit in packets traveling through TT.
+  - `probability` the likelihood of flipping a bit
++ RandomByte: Replaces bytes in the packets traveling through TT with random
   values.
-  o `probability` the likelihood of flipping a byte
-o Wan: Simulate latency on a WAN.
-  o `median_latency` median latency to add, in milliseconds
-o Zero: Zeros the values in packets traveling through TT.
+  - `probability` the likelihood of flipping a byte
++ Wan: Simulate latency on a WAN.
+  - `median_latency` median latency to add, in milliseconds
++ Zero: Zeros the values in packets traveling through TT.
 
 
 
