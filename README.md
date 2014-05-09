@@ -53,15 +53,16 @@ need to copy to install trouble-tunnel in a different location.
 
 Running TT
 ==========
-Running TT is also easy. Just start trouble-tunnel with the name of the
+Running TT is also easy. Just start `trouble-tunnel` with the name of the
 configuration file:
 
 ````
 $ trouble-tunnel config.tt
 ````
 
-When you build TT, ant makes a `trouble-tunnel` executable and a
-`trouble-tunnel.jar` file in the dist directory
+TT runs, lying in wait for your application to connect. When your
+application connects, TT forwards traffic to the actual destination,
+applying the filters you have configured on the way.
 
 Configuring TT
 ==============
@@ -110,22 +111,26 @@ you do!)
 
 These are the filters that come with TT:
 
-+ Chaotic: This filter adds a random amount of latency from between 0 to 1000
++ *Chaotic*: This filter adds a random amount of latency from between 0 to 1000
   milliseconds.
-+ Disconnect: This filter randomly disconnects. The filter takes two
++ *Disconnect*: This filter randomly disconnects. The filter takes two
   parameters.
   - `min_uptime` the minimum amount of time before disconnecting, in
      milliseconds.
   - `max_uptime` the maximum amount of time without disconnecting, in
     milliseconds.
-+ RandomBit: Randomly flips a bit in packets traveling through TT.
++ *RandomBit*: Randomly flips a bit in packets traveling through TT. The filter
+  takes one parameter:
   - `probability` the likelihood of flipping a bit
-+ RandomByte: Replaces bytes in the packets traveling through TT with random
-  values.
++ *RandomByte*: Replaces bytes in the packets traveling through TT with random
+  values. The filter takes one parameter:
   - `probability` the likelihood of flipping a byte
-+ Wan: Simulate latency on a WAN.
++ *Wan*: Simulate latency on a WAN. The filter takes one parameter:
   - `median_latency` median latency to add, in milliseconds
-+ Zero: Zeros the values in packets traveling through TT.
++ *Zero*: Zeros the values in packets traveling through TT.
 
+Use It. Break Stuff. Fix Stuff. Repeat.
+=======================================
 
+That's all there is to it. Simple. Diabolically simple, in fact.
 
