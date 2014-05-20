@@ -18,6 +18,8 @@ public interface ConnectionProcessor {
 
     public void stop_logging();
 
+		public ConnectionLogger get_logger();
+
     public Exception  getException();
 
     public Map<String, Long> getStatistics();

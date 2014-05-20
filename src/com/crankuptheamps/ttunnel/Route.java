@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Properties;
 
 public class Route implements Runnable {
@@ -43,36 +45,73 @@ public class Route implements Runnable {
         logger.enable();
     }
 
+    private boolean stopped = false;
+    private ServerSocket serverSocket;
+    private final List<ConnectionProcessor> processors = new LinkedList<ConnectionProcessor>();
+
+    public synchronized void stop() {
+	System.out.println("Route.stop()");
+	if (stopped) {
+	    warn("Route.stop() called but already stopped");
+	}
+	stopped = true;
+
+	synchronized(processors) {
+	    for (ConnectionProcessor proc : processors) {
+		proc.disconnect();
+	    }
+	}
+
+	if (serverSocket != null) {
+	    try
+		{
+		    serverSocket.close();
+		    serverSocket = null;
+		} catch (IOException e) {
+		warn("in Route.stop(): " + e.getMessage());
+	    }
+	}
+
+    }
+
+    public synchronized boolean stopped() {
+	System.out.println("Route.stopped() returning " + stopped);
+	return stopped;
+    }
+
     public void run() {
         info("entered run()");
         try {
-            while (true) {
-                ServerSocket server;
+            while (!stopped()) {
                 try {
-                    server = new ServerSocket(local_port);
+		    if (serverSocket == null) {
+			serverSocket = new ServerSocket(local_port);
+		    }
                     Socket localSocket, remoteSocket;
                     try {
                         info("waiting for connection to serversocket on port " + local_port);
-                        localSocket = server.accept();
+                        localSocket = serverSocket.accept();
                         info("connection received on port " + local_port);
                         info("connecting to remote socket: host: " + remote_hostname + ", port: " + remote_port);
                         remoteSocket = new Socket(remote_hostname, remote_port);
                         info("remote socket connected, constructing connection processor ...");
                         final ConnectionProcessorImpl proc = new ConnectionProcessorImpl(localSocket.getInputStream(),
-                                localSocket.getOutputStream(),
-                                remoteSocket.getInputStream(),
-                                remoteSocket.getOutputStream(),
-                                this.name,
-                                this.log_dir,
-                                filterConfigs);
-                        info("starting connection processor thread ...");
+											 localSocket.getOutputStream(),
+											 remoteSocket.getInputStream(),
+											 remoteSocket.getOutputStream(),
+											 this.name,
+											 this.log_dir,
+											 filterConfigs);
+			synchronized(processors) { processors.add(proc); }
+                        info("starting connection processor impl thread for " + proc.hashCode() +  " ...");
                         new Thread(proc).start();
-                        info("connection processor thread started.");
+                        info("connection processor impl thread started.");
+			//proc.run();
                     } catch (IOException e) {
-
+			warn("Route.run() catch #1: " +e.getMessage());
                     }
                 } catch (IOException e) {
-
+		    warn("Route.run() catch #2: " + e.getMessage());
                 }
 
             }

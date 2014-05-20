@@ -16,7 +16,7 @@ public class ConfigParserTest {
     public void testParse() throws Exception {
         final ConfigParser cp = new ConfigParser();
         cp.parse(new File("tests/sample-config.json"), new ConfigHandler() {
-            @Override
+
             public void config(String name, String remote_addr, int listen_on, String log_dir, Properties[] filter_configs) {
                 if (name.equals("AB")) {
                     Assert.assertEquals("www.google.com:80", remote_addr);

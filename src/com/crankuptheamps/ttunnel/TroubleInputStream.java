@@ -17,7 +17,7 @@ public class TroubleInputStream extends FilterInputStream {
         hasFilters = filters != null && filters.length > 0;
     }
 
-    @Override
+
     public int read() throws IOException {
         int ret = super.read();
         if (ret != -1 && hasFilters) {
@@ -38,7 +38,7 @@ public class TroubleInputStream extends FilterInputStream {
         return ret;
     }
 
-    @Override
+
     public int read(byte[] b) throws IOException {
         int ret = super.read(b);
         if (ret != -1 && hasFilters) {

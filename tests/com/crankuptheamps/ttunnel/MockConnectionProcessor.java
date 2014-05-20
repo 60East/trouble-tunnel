@@ -35,15 +35,18 @@ public class MockConnectionProcessor implements ConnectionProcessor {
         ++stop_logging_count;
     }
 
-    @Override
+
     public IOException getException() {
         throw new RuntimeException("not implemented");
     }
 
-    @Override
+
     public Map<String, Long> getStatistics() {
         throw new RuntimeException("not implemented");
     }
 
+    public ConnectionLogger get_logger() {
+        throw new RuntimeException("not implemented");
+    }
 
 }

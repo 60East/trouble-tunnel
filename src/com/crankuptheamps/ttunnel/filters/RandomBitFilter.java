@@ -46,11 +46,13 @@ public class RandomBitFilter extends Filter {
     }
 
     int[][] get_table_copy_for_unit_testing() {
-        final int[][] t = new int[table.length][table[0].length];
-        for (int i = 0 ; i < t.length ; ++i) {
-            t[i] = Arrays.copyOfRange(table[i], 0, table[i].length);
-        }
-        return t;
+         final int[][] t = new int[256][8];
+         for (int i = 0 ; i < t.length ; ++i) {
+		 					for (int j = 0 ; j < t[i].length ; ++j) {
+							 	t[i][j] = table[i][j];
+							}
+         }
+         return t;
     }
 
     public static int flip_bit_at(final int val, final int at_index) {

@@ -1,5 +1,7 @@
 package com.crankuptheamps.ttunnel;
 
+import com.crankuptheamps.ttunnel.filters.Filter;
+
 import java.io.*;
 import java.util.Map;
 import java.util.Properties;
@@ -11,6 +13,7 @@ public class ConnectionProcessorImpl implements Runnable, ConnectionProcessor {
     private final ConnectionProcessorPipe local_to_remote_pipe;
     final ConnectionProcessorPipe[] pipes;
     final Thread[] threads;
+		final ConnectionLogger logger;
 
     public ConnectionProcessorImpl(final InputStream localIn,
                                    final OutputStream localOut,
@@ -21,14 +24,9 @@ public class ConnectionProcessorImpl implements Runnable, ConnectionProcessor {
                                    final Properties[] filterConfigs) throws IOException {
         this.id = nextId();
         final FilterFactory filterFactory = new FilterFactory(filterConfigs);
-        ConnectionLogger logger;
-        if (log_dir == null) {
-            logger = new DevnullLogger(route_name, this.id);
-        } else {
-            logger = new ConnectionLoggerImpl(log_dir, route_name, this.id);
-        }
-        this.remote_to_local_pipe = new ConnectionProcessorPipe(localIn,  filterFactory, remoteOut, logger, null); // null buffer sisze => default
-        this.local_to_remote_pipe = new ConnectionProcessorPipe(remoteIn, filterFactory, localOut,  logger, null); // null buffer sisze => default
+		    logger = route_name != null && log_dir != null ? new ConnectionLoggerImpl(log_dir, route_name, this.id) : new ConsoleConnectionLogger(route_name, this.id);
+        this.remote_to_local_pipe = new ConnectionProcessorPipe(localIn,  filterFactory.getInstances(this), remoteOut, logger, null); // null buffer sisze => default
+        this.local_to_remote_pipe = new ConnectionProcessorPipe(remoteIn, filterFactory.getInstances(this), localOut,  logger, null); // null buffer sisze => default
         pipes = new ConnectionProcessorPipe[] {
                 remote_to_local_pipe,
                 local_to_remote_pipe,
@@ -97,7 +95,12 @@ public class ConnectionProcessorImpl implements Runnable, ConnectionProcessor {
         }
     }
 
-    public Map<String, Long> getStatistics() {
+	public ConnectionLogger get_logger()
+	{
+		return logger;
+	}
+
+	public Map<String, Long> getStatistics() {
         throw new RuntimeException("not implemented");
     }
 

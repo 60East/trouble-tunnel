@@ -29,10 +29,10 @@ public class ConnectionProcessorPipeTest {
         filter_configs[0].setProperty("type", "Zero");
 
         final ConnectionProcessorPipe pipe = new ConnectionProcessorPipe(new ByteArrayInputStream(input),
-                                             new FilterFactory(filter_configs),
-                                             output,
-                                             new DevnullLogger("test", 1),
-                                             pipe_buf_size);
+									 new FilterFactory(filter_configs).getInstances(new MockConnectionProcessor()),
+									 output,
+									 new DevnullLogger(),
+									 pipe_buf_size);
         pipe.run();
         print(input, "input");
         print(output.toByteArray(), "output");
@@ -68,9 +68,9 @@ public class ConnectionProcessorPipeTest {
         filter_configs[1].setProperty("median_latency", "" + latency);
 
         final ConnectionProcessorPipe pipe = new ConnectionProcessorPipe(new ByteArrayInputStream(input),
-                new FilterFactory(filter_configs),
+                new FilterFactory(filter_configs).getInstances(new MockConnectionProcessor()),
                 output,
-                new DevnullLogger("test", 1),
+                new DevnullLogger(),
                 pipe_buf_size);
         pipe.run();
         print(input, "input");

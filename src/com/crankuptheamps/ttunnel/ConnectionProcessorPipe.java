@@ -1,5 +1,7 @@
 package com.crankuptheamps.ttunnel;
 
+import com.crankuptheamps.ttunnel.filters.Filter;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -14,14 +16,14 @@ public class ConnectionProcessorPipe implements ConnectionProcessor, Runnable {
     private final ConnectionLogger logger;
     private final int bufferSize;
 
-    public ConnectionProcessorPipe(final InputStream instream, final FilterFactory filterFactory, OutputStream outstream, final ConnectionLogger logger,  final Integer bufferSize) {
-        this.instream =  new TroubleInputStream(instream, filterFactory.getInstances(this));
+    public ConnectionProcessorPipe(final InputStream instream, final Filter[] filters, OutputStream outstream, final ConnectionLogger logger,  final Integer bufferSize) {
+        this.instream =  new TroubleInputStream(instream, filters);
         this.outstream = outstream;
         this.bufferSize = bufferSize == null ? 1024 * 1024 : bufferSize;
         this.logger = logger;
     }
 
-    @Override
+    
     public void disconnect(){
         try {
             instream.close();
@@ -37,7 +39,7 @@ public class ConnectionProcessorPipe implements ConnectionProcessor, Runnable {
     }
 
     private Boolean egress_paused = false;
-    @Override
+    
     public void pause_egress() {
         synchronized(egress_paused) {
             egress_paused = true;
@@ -51,7 +53,7 @@ public class ConnectionProcessorPipe implements ConnectionProcessor, Runnable {
     }
 
     private Boolean ingress_paused = false;
-    @Override
+    
     public void pause_ingress() {
         synchronized (ingress_paused) {
             ingress_paused = true;
@@ -64,7 +66,7 @@ public class ConnectionProcessorPipe implements ConnectionProcessor, Runnable {
     }
 
     private Boolean logging_enabled = false;
-    @Override
+    
     public void start_logging() {
         synchronized(logging_enabled) {
             logging_enabled = true;
@@ -72,21 +74,26 @@ public class ConnectionProcessorPipe implements ConnectionProcessor, Runnable {
 
     }
 
-    @Override
+    
     public void stop_logging() {
         synchronized (logging_enabled) {
             logging_enabled = false;
         }
     }
 
-    private boolean logging_enabled() {
+	public ConnectionLogger get_logger()
+	{
+		return logger;
+	}
+
+	private boolean logging_enabled() {
         synchronized (logging_enabled) {
             return logging_enabled;
         }
     }
 
     private long bytes_in, bytes_out, read_ms, write_ms, read_count,  write_count, began_at, ended_at, exception_at;
-    @Override
+    
     public Map<String, Long> getStatistics() {
         final Map<String, Long> stat = new HashMap<String, Long>(6);
         stat.put("bytes_in",   bytes_in);
@@ -102,7 +109,7 @@ public class ConnectionProcessorPipe implements ConnectionProcessor, Runnable {
         return stat;
     }
 
-    @Override
+    
     public void run() {
         logger.entering("run", this);
         began_at = System.currentTimeMillis();

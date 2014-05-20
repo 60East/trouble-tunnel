@@ -20,7 +20,7 @@
 
 <path id="compile.path">
   <fileset dir="${basedir}/lib">
-    <include name="commons-io-2.4.jar" />
+    <include name="commons-io-2.2.jar" />
     <include name="json_simple-1.1.jar" />
     <include name="log4j-1.2.17.jar" />
   </fileset>
@@ -38,7 +38,7 @@
     <include name="junit.jar"/>
   </fileset>
   <fileset dir="${basedir}/lib">
-    <include name="commons-io-2.4.jar" />
+    <include name="commons-io-2.2.jar" />
     <include name="json_simple-1.1.jar" />
   </fileset>
   <pathelement location="${classes}"/>

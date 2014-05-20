@@ -4,8 +4,8 @@ public class DevnullLogger implements ConnectionLogger {
 
     private final String name;
 
-    DevnullLogger(final String route_name, final int id) {
-        this.name = "devnull-" + route_name + "-" + id;
+    DevnullLogger() {
+        this.name = "devnull-logger";
     }
 
     public void enable() {
