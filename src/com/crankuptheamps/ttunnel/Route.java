@@ -50,7 +50,7 @@ public class Route implements Runnable {
     private final List<ConnectionProcessor> processors = new LinkedList<ConnectionProcessor>();
 
     public synchronized void stop() {
-	System.out.println("Route.stop()");
+	debug("Route.stop() Route-" + hashCode());
 	if (stopped) {
 	    warn("Route.stop() called but already stopped");
 	}
@@ -66,7 +66,9 @@ public class Route implements Runnable {
 	    try
 		{
 		    serverSocket.close();
+		    info("Route-" + hashCode() + " serverSocket closed");
 		    serverSocket = null;
+		    info("Route-" + hashCode() + " serverSocket: " + serverSocket);
 		} catch (IOException e) {
 		warn("in Route.stop(): " + e.getMessage());
 	    }
@@ -75,21 +77,23 @@ public class Route implements Runnable {
     }
 
     public synchronized boolean stopped() {
-	System.out.println("Route.stopped() returning " + stopped);
+	debug("Route.stopped() returning " + stopped);
 	return stopped;
     }
 
     public void run() {
-        info("entered run()");
+        info("Route-" + hashCode() + " entering run()");
         try {
             while (!stopped()) {
                 try {
 		    if (serverSocket == null) {
+			info("Thread-" + Thread.currentThread().hashCode() + " Route-" + hashCode() + " constructing new ServerSocket on port " + local_port);
 			serverSocket = new ServerSocket(local_port);
 		    }
                     Socket localSocket, remoteSocket;
                     try {
                         info("waiting for connection to serversocket on port " + local_port);
+			info("Thread-" + Thread.currentThread().hashCode() + " Route-" + hashCode() + " calling accept()");
                         localSocket = serverSocket.accept();
                         info("connection received on port " + local_port);
                         info("connecting to remote socket: host: " + remote_hostname + ", port: " + remote_port);
@@ -107,16 +111,17 @@ public class Route implements Runnable {
                         new Thread(proc).start();
                         info("connection processor impl thread started.");
 			//proc.run();
-                    } catch (IOException e) {
-			warn("Route.run() catch #1: " +e.getMessage());
+                    } catch (java.net.SocketException ignored) {
+			// happens if the serverSocket is closed while we're blocking on accept()
                     }
                 } catch (IOException e) {
-		    warn("Route.run() catch #2: " + e.getMessage());
+		    // thrown by ServerSocket construction
+		    warn("Route-" + hashCode() + " run() catch #2: " + e.getMessage());
                 }
 
             }
         } finally {
-            info("leaving run()");
+            info("Route-" + hashCode() + " leaving run()");
         }
     }
 
