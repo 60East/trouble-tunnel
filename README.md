@@ -131,12 +131,12 @@ Subclasses of the `Filter` class must provide a public constructor that accepts 
 So, while the `type` entry is always required for each map in the `filters` array, other entries may be required depending on the requirements of the `Filter` implementation specified in the `type` entry.
 
 
-Core Trouble
-======================
+Everybody's Got Troubles
+========================
 
-The filters are what makes TT tick. TT comes with a core set of filters, and it's
-easy to write your own (see the next section,  please contribute them back to the repository when
-you do!)
+The filters are what makes TT tick. TT comes with a core set of filters, and
+it's easy to write your own (see the next section, and please contribute your
+filters back to the repository!)
 
 These are the filters that come with TT:
 
@@ -158,11 +158,24 @@ These are the filters that come with TT:
   - `median_latency` median latency to add, in milliseconds
 + *Zero*: Zeros the values in packets traveling through TT.
 
-Custom Trouble
-=======================
-Implementing your own, custom Filter for TT is as simple as extending the `com.crankuptheamps.ttunnel.filters.Filter` class.  Luckily, you'll find the source for all of the Filter implementations listed in the previous section in `src` directory of the project.
+Your Own Private Trouble
+========================
 
-Extending the `Filter` class involves implementing three simple methods - a public constructor and two `filter` methods.  Here's a trivial example from the test suite that doesn't actually alter the data stream at all:
+Ready for some real havoc? Want to see if your application can handle something
+truly odd? Want to generate specific trouble that you know your application will
+run into?  Custom filters are for you!
+
+Implementing your own, custom Filter for TT is as simple as extending the
+`com.crankuptheamps.ttunnel.filters.Filter` class.  Luckily, you'll find the
+source for all of the core Filter implementations (listed in the previous
+section) in `src` directory of the project.
+
+Extending the `Filter` class involves implementing three simple methods:
+- a public constructor
+- and two `filter` methods.
+
+Here's a trivial example from the test suite that doesn't actually alter the
+data stream at all:
 
     package com.crankuptheamps.ttunnel.filters;
 
@@ -184,7 +197,10 @@ Extending the `Filter` class involves implementing three simple methods - a publ
 
     }
 
-The configuration and initialization procedure for Filters is documented in the Configuring TT section above.  In this case, the following `filters` configuration would add a NoFilter instance to a route's filter chain:
+The configuration and initialization procedure for Filters is documented in the
+Configuring TT section above.  In this case, the following `filters`
+configuration would add a NoFilter instance to a route's filter chain:
+
 
        "filters": [
          {"type" : "No",
@@ -193,9 +209,17 @@ The configuration and initialization procedure for Filters is documented in the 
          }
         ]
 
-On startup, TT will first look for a class named `No` assuming that fails, it will find our custom `NoFilter` implementation by looking for  a class named `com.crankuptheamps.ttunnel.filters.NoFilter`.  TT will then dynamically invoke the NoFilter constructor and pass it a `java.util.Properties` object with the single key/value pair "foo=bar" (which isn't used or needed here but included just to demonstrate Filter configuration).
+Simple!  Here's how it works:  On startup, TT will first look for a class named
+`No`. Assuming that fails, TT will find our custom `NoFilter` implementation by
+looking for  a class named `com.crankuptheamps.ttunnel.filters.NoFilter`. TT
+then dynamically invokes the NoFilter constructor and passes it a
+`java.util.Properties` object with the single key/value pair "foo=bar". (The
+`NoFilter` class doesn't use the properties, but we added this option to the
+file just to show you how configuration works).
 
-The ConnectionProcessor object that TT provides to the NoFilter constructor is accessible at any time from the `Filter` base class and provides some fairly self-explanatory control API:
+The ConnectionProcessor object that TT provides to the NoFilter constructor is
+accessible at any time from the `Filter` base class and provides some fairly
+self-explanatory control methods:
 
 ```
     public void disconnect();
@@ -210,7 +234,7 @@ The ConnectionProcessor object that TT provides to the NoFilter constructor is a
 
     public void stop_logging();
 
-		public ConnectionLogger get_logger();
+    public ConnectionLogger get_logger();
 
     public Exception  getException();
 
