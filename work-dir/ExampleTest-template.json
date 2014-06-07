@@ -1,0 +1,27 @@
+[
+
+{"name": "here->B",
+"listen_on":"${b_local_port}",
+"remote_addr":"${b_remote_host}:${b_remote_port}",
+"log_dir": "log-2B",
+"filters": [
+{"type" : "Wan",
+"description" : "WAN simulator from here to B",
+"median_latency" : "${b_latency}"
+}
+]
+},
+
+{"name": "here->C",
+"listen_on":"9005",
+"remote_addr":"C:9004",
+"log_dir": "log-Not2B"
+"filters": [
+{"type" : "Wan",
+"description" : "WAN simulator from here to B",
+"median_latency" : "${c_latency}"
+}
+]
+}
+
+]

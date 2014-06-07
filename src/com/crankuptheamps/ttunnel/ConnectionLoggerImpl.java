@@ -16,9 +16,16 @@ public class ConnectionLoggerImpl implements ConnectionLogger {
 
     ConnectionLoggerImpl(final File log_dir, final String route_name, final Integer connection_id) {
         System.out.println("ConnectionLoggerImpl.<init>(" + log_dir + ", " + route_name + ", " + connection_id + ")");
-        if (!log_dir.exists() && ! !log_dir.mkdirs()) {
-            throw new Error("log dir does not exist and could not be created: " + log_dir.getAbsolutePath());
-        }
+
+		 if (!log_dir.exists())
+		 {
+			log_dir.mkdirs();
+		 }
+		 if (!log_dir.exists())
+		 {
+			throw new Error("log dir does not exist and could not be created: " + log_dir.getAbsolutePath());
+		 }
+
         this.route_name = route_name;
         this.connection_id = connection_id;
 

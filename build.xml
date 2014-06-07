@@ -81,6 +81,8 @@
         <exclude name="**/NoFilter.class"/>
         <exclude name="**/ConfigParserTest$1.class"/>
         <exclude name="**/ConfigParserTest$1.class"/>
+	<!-- this is an abstract base class, not intended to be run -->
+        <exclude name="**/TroubleTest.class"/>
       </fileset>
     </batchtest>
   </junit>
@@ -151,7 +153,7 @@
       <attribute name="Implementation-Vendor" value="60East Technologies, Inc."/>
       <attribute name="Main-Class" value="com.crankuptheamps.ttunnel.Main"/>
       <!--<attribute name="Class-Path:" value="./log4j.properties"/>-->
-    </manifest>
+			     </manifest>
     <zipgroupfileset dir="${basedir}/lib" includes="*.jar" />
   </jar>
 

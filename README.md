@@ -40,9 +40,7 @@ TT requires:
 
 Clone the TT repository, navigate to the root directory, and type
 
-````
-$ ant
-````
+    $ ant
 
 Anticlimactic, but easy.
 
@@ -56,9 +54,7 @@ Running TT
 Running TT is also easy. Just start `trouble-tunnel` with the name of the
 configuration file:
 
-````
-$ trouble-tunnel config.tt
-````
+    $ trouble-tunnel config.tt
 
 TT runs, lying in wait for your application to connect. When your
 application connects, TT forwards traffic to the actual destination,
@@ -77,7 +73,6 @@ defines a *route*. A route is:
 
 Here's an example configuration file that contains two routes:
 
-````
     [
       {"name": "here->B",
        "listen_on":"9004",
@@ -97,7 +92,7 @@ Here's an example configuration file that contains two routes:
        "log_dir": "log-Not2B"
       }
     ]
-````
+
 
 The first route, `here->B`, routes traffic from `localhost:9004` to `B:9004`.
 The route logs to the directory `log-2B`. The route applies a single filter,
@@ -221,7 +216,6 @@ The ConnectionProcessor object that TT provides to the NoFilter constructor is
 accessible at any time from the `Filter` base class and provides some fairly
 self-explanatory control methods:
 
-```
     public void disconnect();
 
     public void pause();
@@ -239,15 +233,83 @@ self-explanatory control methods:
     public Exception  getException();
 
     public Map<String, Long> getStatistics();
-```
 
 The getStatistics() method provides values for the following keys:
 
     "bytes_in", "bytes_out", "read_ms", "write_ms", "read_count", "write_count", "began_at", "ended_at", "exception_at"
 
 
-Use It. Break Stuff. Fix Stuff. Repeat.
+Use It. Test Stuff. Fix Stuff. Repeat.
 =======================================
 
 That's all there is to it. Simple. Diabolically simple, in fact.
 
+The real utility of TT becomes apparent when you use it in your testing infrastructure.  To help you out with this we've included a base test class, `com.crankuptheamps.ttunnel.TroubleTest`, that takes care of configuring, setting up and tearing down TT for each of your test methods.
+
+To demonstrate how to use `TroubleTest`, let's assume you're creating a new test class named `ExampleTest`.  You'll find an actual implementation of `ExampleTest` under the `tests` directory.
+
+Your implementation of `ExampleTest` will need to provide a public no-arg constructor that passes the location of the test's working directory to the base class constructor as a `java.io.File` object.
+
+Our implementation of `ExampleTest` uses `./work-dir` as a working directory.  This working directory must contain two files with names based on the test class name:
+
+    <working-directory>/<abbreviated-class-name>.properties
+	This is a plain old java.util.Properties file.  You'll be able to refer to its key/value pairs from the next file:  For example:
+
+    
+    b_local_port=8989
+    b_remote_port=80
+    b_remote_host=www.google.com
+    b_latency=1000
+    c_latency=2000
+
+    
+    <working-directory>/<abbreviated-class-name>-template.json
+    This is a TT configuration JSON file.  It can refer to values from the properties file by wrapping them in ${}.  For example:
+    
+    [
+    
+    	{"name": "here->B",
+    		"listen_on":"${b_local_port}",
+    		"remote_addr":"${b_remote_host}:${b_remote_port}",
+    		"log_dir": "log-2B",
+    		"filters": [
+    			{"type" : "Wan",
+    			 "description" : "WAN simulator from here to B",
+    			 "median_latency" : "${b_latency}"
+    			}
+    		]
+    	},
+    
+    	{"name": "here->C",
+    		"listen_on":"9005",
+    		"remote_addr":"C:9004",
+    		"log_dir": "log-Not2B"
+    		"filters": [
+    			{"type" : "Wan",
+    			 "description" : "WAN simulator from here to B",
+    			 "median_latency" : "${c_latency}"
+    		  }
+    		]
+    	}
+    
+    ]
+
+In our `ExampleTest` implementation, these actual location of these two files is `./work-dir/ExampleTest-template.json` and `./work-dir/ExampleTest.properties`.
+
+The `TroubleTest` setUp method reads the template TT configuration, substitutes values from the properties file into it, writes it to  `<working-directory>/<abbreviated-class-name>.json` and starts TT with it.  Ås you debug TT while unit testing  you can inspect this generated file to verify the actual configuration that TT is using.
+
+You can access your properties file contents directly from within your tests by calling utility methods that `TroubleTest` provides:
+
+		@Test
+		public void test_local_port() throws Exception
+		{
+			final Socket s = new Socket("localhost", getInt("b_local_port"));
+			s.getInputStream();
+			s.getOutputStream();
+			Assert.assertEquals("expected latency on this connection in ms", getLong("b_latency"), 1000);
+			Assert.assertTrue(new File(getFile("log_dir"), "file.log").exists());
+			Assert.assertTrue(s.isConnected());
+			s.close();
+		}
+
+This is useful in preventing duplication of configurable values like port numbers or Filter configuration values like latencies in your code.
