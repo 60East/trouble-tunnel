@@ -55,42 +55,22 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <breakpoint_rules converted="true" />
     <ui_properties converted="true" />
+    <breakpoint_rules converted="true" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
     <favorites_list name="TroubleTunnel" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.45722434">
+    <splitter split-orientation="horizontal" split-proportion="0.5488095">
       <split-first>
         <leaf>
-          <file leaf-file-name="RandomBitFilter.java" pinned="false" current="true" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/com/crankuptheamps/ttunnel/filters/RandomBitFilter.java">
+          <file leaf-file-name="SearchFilterTest.java" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/tests/com/crankuptheamps/ttunnel/filters/SearchFilterTest.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.5274262" vertical-offset="0" max-vertical-offset="1422">
-                  <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="ConnectionProcessorPipeTest.java" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/tests/com/crankuptheamps/ttunnel/ConnectionProcessorPipeTest.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="76" max-vertical-offset="1485">
-                  <caret line="70" column="92" selection-start-line="70" selection-start-column="92" selection-end-line="70" selection-end-column="92" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="RandomBitFilterTest.java" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/tests/com/crankuptheamps/ttunnel/filters/RandomBitFilterTest.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1560">
-                  <caret line="70" column="69" selection-start-line="70" selection-start-column="69" selection-end-line="70" selection-end-column="69" />
+                <state vertical-scroll-proportion="0.0" vertical-offset="360" max-vertical-offset="840">
+                  <caret line="37" column="19" selection-start-line="37" selection-start-column="16" selection-end-line="37" selection-end-column="27" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -98,12 +78,51 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="build.xml" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/build.xml">
+          <file leaf-file-name="SearchFilterTest-template.json" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/tests/work/SearchFilterTest-template.json">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="1203" max-vertical-offset="2625">
-                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                <state vertical-scroll-proportion="-15.0" vertical-offset="0" max-vertical-offset="510">
+                  <caret line="24" column="37" selection-start-line="24" selection-start-column="37" selection-end-line="24" selection-end-column="58" />
                   <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="SearchFilterTest.properties" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/tests/work/SearchFilterTest.properties">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="270">
+                  <caret line="10" column="23" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="DisconnectFilterTest.java" pinned="false" current="true" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/tests/com/crankuptheamps/ttunnel/filters/DisconnectFilterTest.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.42653352" vertical-offset="301" max-vertical-offset="1215">
+                  <caret line="45" column="31" selection-start-line="45" selection-start-column="31" selection-end-line="45" selection-end-column="31" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="SearchFilter.java" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/com/crankuptheamps/ttunnel/filters/SearchFilter.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1920">
+                  <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+                  <folding>
+                    <element signature="e#1144#1152#0" expanded="true" />
+                    <element signature="e#2831#2832#0" expanded="true" />
+                    <element signature="e#2859#2860#0" expanded="true" />
+                    <element signature="e#3793#4227#0" expanded="true" />
+                    <element signature="e#4212#4213#0" expanded="true" />
+                    <element signature="e#4371#4804#0" expanded="true" />
+                    <element signature="e#4789#4790#0" expanded="true" />
+                    <marker date="1403933510000" expanded="true" signature="5096:5213" placeholder="{...}" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -112,12 +131,31 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="RandomBitFilterTest.java" pinned="false" current="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/tests/com/crankuptheamps/ttunnel/filters/RandomBitFilterTest.java">
+          <file leaf-file-name="SearchFilter.java" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/com/crankuptheamps/ttunnel/filters/SearchFilter.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.042194095" vertical-offset="0" max-vertical-offset="1470">
-                  <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-                  <folding />
+                <state vertical-scroll-proportion="0.0" vertical-offset="976" max-vertical-offset="1890">
+                  <caret line="83" column="53" selection-start-line="83" selection-start-column="53" selection-end-line="83" selection-end-column="53" />
+                  <folding>
+                    <element signature="e#1144#1152#0" expanded="true" />
+                    <element signature="e#3793#4227#0" expanded="true" />
+                    <element signature="e#4212#4213#0" expanded="true" />
+                    <element signature="e#4371#4804#0" expanded="true" />
+                    <element signature="e#4789#4790#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="StringTrafficker.java" pinned="false" current="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/tests/com/crankuptheamps/ttunnel/StringTrafficker.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="1.2444445" vertical-offset="120" max-vertical-offset="3165">
+                  <caret line="64" column="27" selection-start-line="64" selection-start-column="27" selection-end-line="64" selection-end-column="27" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                    <element signature="e#1386#1402#0" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -134,30 +172,50 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/com/crankuptheamps/ttunnel/DevnullLogger.java" />
         <option value="$PROJECT_DIR$/src/com/crankuptheamps/ttunnel/ConnectionLogger.java" />
         <option value="$PROJECT_DIR$/src/com/crankuptheamps/ttunnel/ConnectionLoggerImpl.java" />
-        <option value="$PROJECT_DIR$/src/com/crankuptheamps/ttunnel/ConnectionProcessorPipe.java" />
         <option value="$PROJECT_DIR$/src/com/crankuptheamps/ttunnel/filters/WanFilter.java" />
         <option value="$PROJECT_DIR$/src/com/crankuptheamps/ttunnel/filters/ChaoticFilter.java" />
         <option value="$PROJECT_DIR$/tests/com/crankuptheamps/ttunnel/WanFilterTest.java" />
         <option value="$PROJECT_DIR$/src/com/crankuptheamps/ttunnel/filters/Filter.java" />
         <option value="$PROJECT_DIR$/tests/com/crankuptheamps/ttunnel/ChaoticFilterTest.java" />
         <option value="$PROJECT_DIR$/src/com/crankuptheamps/ttunnel/filters/RandomByteFilter.java" />
-        <option value="$PROJECT_DIR$/tests/com/crankuptheamps/ttunnel/MockConnectionProcessor.java" />
         <option value="$PROJECT_DIR$/src/com/crankuptheamps/ttunnel/TroubleInputStream.java" />
         <option value="$PROJECT_DIR$/tests/com/crankuptheamps/ttunnel/filters/ThingTest.java" />
         <option value="$PROJECT_DIR$/build.xml" />
-        <option value="$PROJECT_DIR$/tests/com/crankuptheamps/ttunnel/filters/RandomBitFilterTest.java" />
         <option value="$PROJECT_DIR$/tests/com/crankuptheamps/ttunnel/ConnectionProcessorPipeTest.java" />
         <option value="$PROJECT_DIR$/src/com/crankuptheamps/ttunnel/filters/RandomBitFilter.java" />
+        <option value="$PROJECT_DIR$/tests/com/crankuptheamps/ttunnel/filters/RandomBitFilterTest.java" />
+        <option value="$PROJECT_DIR$/tests/com/crankuptheamps/ttunnel/ExampleTest.java" />
+        <option value="$PROJECT_DIR$/src/com/crankuptheamps/ttunnel/StringTrafficker.java" />
+        <option value="$PROJECT_DIR$/tests/com/crankuptheamps/ttunnel/SimpleServerTest.java" />
+        <option value="$PROJECT_DIR$/src/com/crankuptheamps/ttunnel/DevnullLogger.java" />
+        <option value="$PROJECT_DIR$/tests/work/PatternFilterTest.properties" />
+        <option value="$PROJECT_DIR$/src/com/crankuptheamps/ttunnel/filters/PassThroughFilter.java" />
+        <option value="$PROJECT_DIR$/tests/com/crankuptheamps/ttunnel/TroubleTest.java" />
+        <option value="$PROJECT_DIR$/tests/com/crankuptheamps/ttunnel/StringTraffickerTest.java" />
+        <option value="$PROJECT_DIR$/tests/com/crankuptheamps/ttunnel/BufferTest.java" />
+        <option value="$PROJECT_DIR$/tests/com/crankuptheamps/ttunnel/filters/PatternFilterTest.java" />
+        <option value="$PROJECT_DIR$/tests/work/PatternFilterTest-template.json" />
+        <option value="$PROJECT_DIR$/src/com/crankuptheamps/ttunnel/filters/PatternFilter.java" />
+        <option value="$PROJECT_DIR$/src/com/crankuptheamps/ttunnel/ConnectionProcessor.java" />
+        <option value="$PROJECT_DIR$/src/com/crankuptheamps/ttunnel/ConnectionProcessorImpl.java" />
+        <option value="$PROJECT_DIR$/src/com/crankuptheamps/ttunnel/ConnectionProcessorPipe.java" />
+        <option value="$PROJECT_DIR$/tests/com/crankuptheamps/ttunnel/MockConnectionProcessor.java" />
+        <option value="$PROJECT_DIR$/src/com/crankuptheamps/ttunnel/StringUtils.java" />
+        <option value="$PROJECT_DIR$/src/com/crankuptheamps/ttunnel/filters/SearchFilter.java" />
+        <option value="$PROJECT_DIR$/tests/com/crankuptheamps/ttunnel/StringTrafficker.java" />
+        <option value="$PROJECT_DIR$/tests/work/SearchFilterTest-template.json" />
+        <option value="$PROJECT_DIR$/tests/com/crankuptheamps/ttunnel/filters/SearchFilterTest.java" />
+        <option value="$PROJECT_DIR$/tests/work/SearchFilterTest.properties" />
+        <option value="$PROJECT_DIR$/tests/com/crankuptheamps/ttunnel/filters/DisconnectFilterTest.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="y" value="22" />
-    <option name="width" value="2560" />
-    <option name="height" value="1574" />
+    <option name="width" value="1680" />
+    <option name="height" value="1024" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -185,6 +243,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -231,6 +291,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="work" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TroubleTunnel" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="trouble-tunnel" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="ttunnel" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -245,7 +323,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="tests" />
+              <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -259,8 +337,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -271,7 +347,7 @@
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="recentsLimit" value="5" />
     <property name="MemberChooser.sorted" value="false" />
-    <property name="options.lastSelected" value="project.propDebugger" />
+    <property name="options.lastSelected" value="editor.preferences.appearance" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/log4j-1.2.17.jar!/" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="GoToClass.includeJavaFiles" value="false" />
@@ -285,6 +361,7 @@
     <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="dynamic.classpath" value="false" />
+    <property name="LayoutCode.rearrangeEntriesJava" value="false" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -299,15 +376,20 @@
       <recent name="com.crankuptheamps.ttunnel" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.RandomBitFilterTest">
-    <configuration default="false" name="RandomBitFilterTest.testTable" type="JUnit" factoryName="JUnit" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+  <component name="RunManager" selected="JUnit.DisconnectFilterTest.testDisconnectDueToMin">
+    <configuration default="false" name="SearchFilterTest.test_get_property" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="com.crankuptheamps.ttunnel.filters.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <module name="TroubleTunnel" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="com.crankuptheamps.ttunnel.filters" />
-      <option name="MAIN_CLASS_NAME" value="com.crankuptheamps.ttunnel.filters.RandomBitFilterTest" />
-      <option name="METHOD_NAME" value="testTable" />
+      <option name="MAIN_CLASS_NAME" value="com.crankuptheamps.ttunnel.filters.SearchFilterTest" />
+      <option name="METHOD_NAME" value="test_get_property" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -323,59 +405,18 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <configuration default="false" name="RandomBitFilterTest.testFlip" type="JUnit" factoryName="JUnit" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+    <configuration default="false" name="SearchFilterTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="com.crankuptheamps.ttunnel.filters.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <module name="TroubleTunnel" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="com.crankuptheamps.ttunnel.filters" />
-      <option name="MAIN_CLASS_NAME" value="com.crankuptheamps.ttunnel.filters.RandomBitFilterTest" />
-      <option name="METHOD_NAME" value="testFlip" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="false" name="RandomBitFilterTest.check_speed" type="JUnit" factoryName="JUnit" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="TroubleTunnel" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.crankuptheamps.ttunnel.filters" />
-      <option name="MAIN_CLASS_NAME" value="com.crankuptheamps.ttunnel.filters.RandomBitFilterTest" />
-      <option name="METHOD_NAME" value="check_speed" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="false" name="RandomBitFilterTest" type="JUnit" factoryName="JUnit" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="TroubleTunnel" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.crankuptheamps.ttunnel.filters" />
-      <option name="MAIN_CLASS_NAME" value="com.crankuptheamps.ttunnel.filters.RandomBitFilterTest" />
+      <option name="MAIN_CLASS_NAME" value="com.crankuptheamps.ttunnel.filters.SearchFilterTest" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -392,14 +433,75 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <configuration default="false" name="RandomBitFilterTest.test_filter" type="JUnit" factoryName="JUnit" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+    <configuration default="false" name="SearchFilterTest.test_pauser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="com.crankuptheamps.ttunnel.filters.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <module name="TroubleTunnel" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="com.crankuptheamps.ttunnel.filters" />
-      <option name="MAIN_CLASS_NAME" value="com.crankuptheamps.ttunnel.filters.RandomBitFilterTest" />
-      <option name="METHOD_NAME" value="test_filter" />
+      <option name="MAIN_CLASS_NAME" value="com.crankuptheamps.ttunnel.filters.SearchFilterTest" />
+      <option name="METHOD_NAME" value="test_pauser" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="SearchFilterTest.test_static_replacer" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="com.crankuptheamps.ttunnel.filters.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="TroubleTunnel" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.crankuptheamps.ttunnel.filters" />
+      <option name="MAIN_CLASS_NAME" value="com.crankuptheamps.ttunnel.filters.SearchFilterTest" />
+      <option name="METHOD_NAME" value="test_static_replacer" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="DisconnectFilterTest.testDisconnectDueToMin" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="com.crankuptheamps.ttunnel.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="TroubleTunnel" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.crankuptheamps.ttunnel.filters" />
+      <option name="MAIN_CLASS_NAME" value="com.crankuptheamps.ttunnel.DisconnectFilterTest" />
+      <option name="METHOD_NAME" value="testDisconnectDueToMin" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -473,6 +575,40 @@
       </option>
       <envs />
       <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="StringTraffickerTest.test_something" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="com.crankuptheamps.ttunnel.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="TroubleTunnel" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.crankuptheamps.ttunnel" />
+      <option name="MAIN_CLASS_NAME" value="com.crankuptheamps.ttunnel.StringTraffickerTest" />
+      <option name="METHOD_NAME" value="test_something" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
     <configuration default="false" name="ConnectionProcessorPipeTest.simpleTest" type="JUnit" factoryName="JUnit">
@@ -550,23 +686,24 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <list size="8">
-      <item index="0" class="java.lang.String" itemvalue="JUnit.ConnectionProcessorPipeTest.simpleTest" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.FilterFactoryTest.testSimple" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.FilterFactoryTest.testInvalidType" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.RandomBitFilterTest.testTable" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.RandomBitFilterTest.testFlip" />
-      <item index="5" class="java.lang.String" itemvalue="JUnit.RandomBitFilterTest.check_speed" />
-      <item index="6" class="java.lang.String" itemvalue="JUnit.RandomBitFilterTest" />
-      <item index="7" class="java.lang.String" itemvalue="JUnit.RandomBitFilterTest.test_filter" />
+    <list size="9">
+      <item index="0" class="java.lang.String" itemvalue="JUnit.StringTraffickerTest.test_something" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.ConnectionProcessorPipeTest.simpleTest" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.FilterFactoryTest.testSimple" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.FilterFactoryTest.testInvalidType" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.SearchFilterTest.test_get_property" />
+      <item index="5" class="java.lang.String" itemvalue="JUnit.SearchFilterTest" />
+      <item index="6" class="java.lang.String" itemvalue="JUnit.SearchFilterTest.test_pauser" />
+      <item index="7" class="java.lang.String" itemvalue="JUnit.SearchFilterTest.test_static_replacer" />
+      <item index="8" class="java.lang.String" itemvalue="JUnit.DisconnectFilterTest.testDisconnectDueToMin" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.RandomBitFilterTest" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.RandomBitFilterTest.test_filter" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.RandomBitFilterTest.testTable" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.RandomBitFilterTest.check_speed" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.RandomBitFilterTest.testFlip" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.DisconnectFilterTest.testDisconnectDueToMin" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.SearchFilterTest.test_pauser" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.SearchFilterTest.test_static_replacer" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.SearchFilterTest" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.SearchFilterTest.test_get_property" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="TestNG" default="true" selected="false">
@@ -593,29 +730,32 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="2560" height="1574" extended-state="6" />
+    <frame x="0" y="22" width="1680" height="1024" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32879582" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960597" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.45351043" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993513" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31099477" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32984293" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2764398" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16275346" sideWeight="0.54648954" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16242038" sideWeight="0.48387095" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.45041704" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16190477" sideWeight="0.48387095" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22303665" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32922202" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27651516" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -637,7 +777,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="7" />
+      <option name="time" value="14" />
     </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
@@ -645,11 +785,141 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/tests/com/crankuptheamps/ttunnel/filters/SearchFilterTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="465">
+          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/com/crankuptheamps/ttunnel/StringTraffickerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="360" max-vertical-offset="450">
+          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/com/crankuptheamps/ttunnel/StringTrafficker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1734" max-vertical-offset="2625">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1386#1402#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/crankuptheamps/ttunnel/filters/SearchFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="435">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding>
+            <element signature="e#1144#1152#0" expanded="true" />
+            <element signature="e#2831#2832#0" expanded="true" />
+            <element signature="e#2859#2860#0" expanded="true" />
+            <element signature="e#3793#4227#0" expanded="true" />
+            <element signature="e#4212#4213#0" expanded="true" />
+            <element signature="e#4371#4804#0" expanded="true" />
+            <element signature="e#4789#4790#0" expanded="true" />
+            <marker date="1403933510000" expanded="true" signature="5096:5213" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/com/crankuptheamps/ttunnel/ExampleTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1305">
+          <caret line="32" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/crankuptheamps/ttunnel/filters/SearchFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="345" max-vertical-offset="435">
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding>
+            <element signature="e#1144#1152#0" expanded="true" />
+            <element signature="e#2831#2832#0" expanded="true" />
+            <element signature="e#2859#2860#0" expanded="true" />
+            <element signature="e#3793#4227#0" expanded="true" />
+            <element signature="e#4212#4213#0" expanded="true" />
+            <element signature="e#4371#4804#0" expanded="true" />
+            <element signature="e#4789#4790#0" expanded="true" />
+            <marker date="1403933510000" expanded="true" signature="5096:5213" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/com/crankuptheamps/ttunnel/filters/SearchFilterTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="600" max-vertical-offset="1200">
+          <caret line="40" column="21" selection-start-line="40" selection-start-column="21" selection-end-line="40" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/com/crankuptheamps/ttunnel/StringTraffickerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2055" max-vertical-offset="2685">
+          <caret line="96" column="55" selection-start-line="96" selection-start-column="55" selection-end-line="96" selection-end-column="55" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/work/ExampleTest-template.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="195" max-vertical-offset="480">
+          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/crankuptheamps/ttunnel/filters/RandomBitFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1125">
+          <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/com/crankuptheamps/ttunnel/ConnectionProcessorPipeTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1050" max-vertical-offset="1635">
+          <caret line="70" column="92" selection-start-line="70" selection-start-column="92" selection-end-line="70" selection-end-column="92" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2670">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/com/crankuptheamps/ttunnel/filters/RandomBitFilterTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1050" max-vertical-offset="1560">
+          <caret line="70" column="69" selection-start-line="70" selection-start-column="69" selection-end-line="70" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/crankuptheamps/ttunnel/filters/RandomBitFilter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1155">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -665,9 +935,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1560">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -686,20 +954,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/crankuptheamps/ttunnel/filters/WanFilter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/crankuptheamps/ttunnel/StringUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/crankuptheamps/ttunnel/DevnullLogger.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -741,13 +995,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/com/crankuptheamps/ttunnel/MockConnectionProcessor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/crankuptheamps/ttunnel/filters/Filter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
@@ -765,7 +1012,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/com/crankuptheamps/ttunnel/ConnectionProcessorPipeTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="76" max-vertical-offset="1485">
+        <state vertical-scroll-proportion="0.51773834" vertical-offset="433" max-vertical-offset="1485">
           <caret line="70" column="92" selection-start-line="70" selection-start-column="92" selection-end-line="70" selection-end-column="92" />
           <folding />
         </state>
@@ -773,18 +1020,207 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/com/crankuptheamps/ttunnel/filters/RandomBitFilterTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1560">
-          <caret line="70" column="69" selection-start-line="70" selection-start-column="69" selection-end-line="70" selection-end-column="69" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="1470">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/com/crankuptheamps/ttunnel/ExampleTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1230">
+          <caret line="32" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/crankuptheamps/ttunnel/DevnullLogger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.07964602" vertical-offset="0" max-vertical-offset="565">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/work/ExampleTest-template.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.125" vertical-offset="0" max-vertical-offset="480">
+          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/crankuptheamps/ttunnel/filters/RandomBitFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1125">
+          <caret line="16" column="31" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/com/crankuptheamps/ttunnel/TroubleTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1305" max-vertical-offset="2730">
+          <caret line="107" column="0" selection-start-line="107" selection-start-column="0" selection-end-line="107" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1587#1588#0" expanded="true" />
+            <element signature="e#1632#1633#0" expanded="true" />
+            <element signature="e#2252#2253#0" expanded="true" />
+            <element signature="e#2300#2301#0" expanded="true" />
+            <element signature="e#3345#3573#0" expanded="true" />
+            <element signature="e#3562#3563#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/crankuptheamps/ttunnel/filters/PassThroughFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.18052517" vertical-offset="0" max-vertical-offset="914">
+          <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#409#410#0" expanded="true" />
+            <element signature="e#437#438#0" expanded="true" />
+            <element signature="e#504#505#0" expanded="true" />
+            <element signature="e#530#531#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/com/crankuptheamps/ttunnel/StringTraffickerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="495">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/crankuptheamps/ttunnel/filters/RandomBitFilter.java">
+    <entry file="file://$PROJECT_DIR$/src/com/crankuptheamps/ttunnel/ConnectionProcessor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5274262" vertical-offset="0" max-vertical-offset="1422">
+        <state vertical-scroll-proportion="0.50161815" vertical-offset="0" max-vertical-offset="927">
+          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/crankuptheamps/ttunnel/ConnectionProcessorImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.46925566" vertical-offset="600" max-vertical-offset="2055">
+          <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+          <folding>
+            <element signature="e#1843#1844#0" expanded="true" />
+            <element signature="e#1875#1876#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/com/crankuptheamps/ttunnel/MockConnectionProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6796116" vertical-offset="0" max-vertical-offset="927">
           <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+          <folding>
+            <element signature="e#420#421#0" expanded="true" />
+            <element signature="e#454#455#0" expanded="true" />
+            <element signature="e#538#539#0" expanded="true" />
+            <element signature="e#568#569#0" expanded="true" />
+            <element signature="e#603#604#0" expanded="true" />
+            <element signature="e#640#641#0" expanded="true" />
+            <element signature="e#745#746#0" expanded="true" />
+            <element signature="e#782#783#0" expanded="true" />
+            <element signature="e#818#819#0" expanded="true" />
+            <element signature="e#856#857#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/crankuptheamps/ttunnel/StringUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="900">
+          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/crankuptheamps/ttunnel/ConnectionProcessorPipe.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="199" max-vertical-offset="3045">
+          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/crankuptheamps/ttunnel/StringTrafficker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="578">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/crankuptheamps/ttunnel/filters/SearchFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1920">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="e#1144#1152#0" expanded="true" />
+            <element signature="e#2831#2832#0" expanded="true" />
+            <element signature="e#2859#2860#0" expanded="true" />
+            <element signature="e#3793#4227#0" expanded="true" />
+            <element signature="e#4212#4213#0" expanded="true" />
+            <element signature="e#4371#4804#0" expanded="true" />
+            <element signature="e#4789#4790#0" expanded="true" />
+            <marker date="1403933510000" expanded="true" signature="5096:5213" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/com/crankuptheamps/ttunnel/StringTrafficker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.2444445" vertical-offset="120" max-vertical-offset="3165">
+          <caret line="64" column="27" selection-start-line="64" selection-start-column="27" selection-end-line="64" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1386#1402#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/com/crankuptheamps/ttunnel/filters/SearchFilterTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="360" max-vertical-offset="840">
+          <caret line="37" column="19" selection-start-line="37" selection-start-column="16" selection-end-line="37" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/work/SearchFilterTest-template.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-15.0" vertical-offset="0" max-vertical-offset="510">
+          <caret line="24" column="37" selection-start-line="24" selection-start-column="37" selection-end-line="24" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/work/SearchFilterTest.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="270">
+          <caret line="10" column="23" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/com/crankuptheamps/ttunnel/filters/DisconnectFilterTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.42653352" vertical-offset="301" max-vertical-offset="1215">
+          <caret line="45" column="31" selection-start-line="45" selection-start-column="31" selection-end-line="45" selection-end-column="31" />
           <folding />
         </state>
       </provider>

@@ -38,11 +38,25 @@ public class ConnectionProcessorPipe implements ConnectionProcessor, Runnable {
         pause_ingress();
     }
 
+    public void resume() {
+        resume_egress();
+        resume_ingress();
+    }
+
     private Boolean egress_paused = false;
-    
+
     public void pause_egress() {
         synchronized(egress_paused) {
             egress_paused = true;
+        }
+    }
+
+    public void resume_egress() {
+        synchronized(egress_paused) {
+            if (!egress_paused) {
+                get_logger().warn("resuming egress but egress not paused");
+            }
+            egress_paused = false;
         }
     }
 
@@ -53,12 +67,22 @@ public class ConnectionProcessorPipe implements ConnectionProcessor, Runnable {
     }
 
     private Boolean ingress_paused = false;
-    
+
     public void pause_ingress() {
         synchronized (ingress_paused) {
             ingress_paused = true;
         }
     }
+
+    public void resume_ingress() {
+        synchronized (ingress_paused) {
+            if (!ingress_paused) {
+                get_logger().warn("resuming ingress but ingress not paused");
+            }
+            ingress_paused = false;
+        }
+    }
+
     private boolean ingress_paused() {
         synchronized (ingress_paused) {
             return ingress_paused;

@@ -10,9 +10,15 @@ public interface ConnectionProcessor {
 
     public void pause();
 
+    public void resume();
+
     public void pause_egress();
 
+    public void resume_egress();
+
     public void pause_ingress();
+
+    public void resume_ingress();
 
     public void start_logging();
 

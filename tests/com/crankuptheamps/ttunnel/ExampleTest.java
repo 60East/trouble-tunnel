@@ -11,7 +11,7 @@ public class ExampleTest extends TroubleTest {
 
  public ExampleTest()
  {
-	super(new File("./work-dir"));
+	super(new File(new File("tests"), "work"));
  }
 
  @Test

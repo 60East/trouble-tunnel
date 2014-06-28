@@ -1,0 +1,29 @@
+[
+    {"name": "static_replacer",
+        "listen_on":"2838",
+        "remote_addr":"localhost:7349",
+        "log_dir": "PatternFilterTest",
+        "filters": [
+            {"type" : "Search",
+                "description" : "replace a groupless regex with a static string"
+                "search_term" : "ipsum",
+                "action": "replace",
+                "replacement": "XXSUM"
+            }
+        ]
+    },
+
+    {"name": "pauser",
+        "listen_on":"2839",
+        "remote_addr":"localhost:7350",
+        "log_dir": "PatternFilterTest",
+        "filters": [
+            {"type" : "Search",
+                "description" : "pause briefly",
+                "search_term" : "ipsum",
+                "action": "pause",
+                "pause_duration": "1000"
+            }
+        ]
+    }
+]

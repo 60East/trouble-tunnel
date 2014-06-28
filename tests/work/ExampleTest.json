@@ -1,0 +1,27 @@
+[
+
+{"name": "here->B",
+"listen_on":"8989",
+"remote_addr":"www.google.com:80",
+"log_dir": "log-2B",
+"filters": [
+{"type" : "Wan",
+"description" : "WAN simulator from here to B",
+"median_latency" : "1000"
+}
+]
+},
+
+{"name": "here->C",
+"listen_on":"9005",
+"remote_addr":"C:9004",
+"log_dir": "log-Not2B"
+"filters": [
+{"type" : "Wan",
+"description" : "WAN simulator from here to B",
+"median_latency" : "2000"
+}
+]
+}
+
+]

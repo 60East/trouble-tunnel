@@ -71,15 +71,33 @@ public class ConnectionProcessorImpl implements Runnable, ConnectionProcessor {
         }
     }
 
+    public void resume() {
+        for (ConnectionProcessor pipe : pipes) {
+            pipe.resume();
+        }
+    }
+
     public void pause_egress() {
         for (ConnectionProcessor pipe : pipes) {
             pipe.pause_egress();
         }
     }
 
+    public void resume_egress() {
+        for (ConnectionProcessor pipe : pipes) {
+            pipe.resume_egress();
+        }
+    }
+
     public void pause_ingress() {
         for (ConnectionProcessor pipe : pipes) {
             pipe.pause_ingress();
+        }
+    }
+
+    public void resume_ingress() {
+        for (ConnectionProcessor pipe : pipes) {
+            pipe.resume_ingress();
         }
     }
 

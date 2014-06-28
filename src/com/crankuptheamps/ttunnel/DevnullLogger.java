@@ -1,5 +1,7 @@
 package com.crankuptheamps.ttunnel;
 
+import com.crankuptheamps.ttunnel.StringUtils;
+
 public class DevnullLogger implements ConnectionLogger {
 
     private final String name;

@@ -1,0 +1,29 @@
+[
+    {"name": "static_replacer",
+        "listen_on":"${static_replacer_local_port}",
+        "remote_addr":"${static_replacer_remote_host}:${static_replacer_remote_port}",
+        "log_dir": "PatternFilterTest",
+        "filters": [
+            {"type" : "Search",
+                "description" : "replace a groupless regex with a static string"
+                "search_term" : "${static_replacer_search_term}",
+                "action": "replace",
+                "replacement": "${static_replacer_replacement}"
+            }
+        ]
+    },
+
+    {"name": "pauser",
+        "listen_on":"${pauser_local_port}",
+        "remote_addr":"${pauser_remote_host}:${pauser_remote_port}",
+        "log_dir": "PatternFilterTest",
+        "filters": [
+            {"type" : "Search",
+                "description" : "pause briefly",
+                "search_term" : "${pauser_search_term}",
+                "action": "pause",
+                "pause_duration": "${pauser_pause_duration}"
+            }
+        ]
+    }
+]
