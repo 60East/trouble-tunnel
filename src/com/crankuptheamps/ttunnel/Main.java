@@ -37,9 +37,7 @@ public class Main {
 	 error("no cmdline args found");
 	 throw new Error(usage);
 	}
-	info("parsing config file: " + args[0]);
 	ConfigParser.parse(new File(args[0]), new MainConfigHandler(working_directory, routes));
-	info("leaving main()");
  }
 
  public void stop()
@@ -58,24 +56,9 @@ public class Main {
 	System.out.println("[Main] " + lvl + ": " + msg);
  }
 
- private static void info(final String msg)
- {
-	log("INFO", msg);
- }
-
- private static void debug(final String msg)
- {
-	log("DEBUG", msg);
- }
-
  private static void error(final String msg)
  {
 	log("ERROR", msg);
- }
-
- private static void warn(final String msg)
- {
-	log("WARN", msg);
  }
 
 }
@@ -93,7 +76,6 @@ class MainConfigHandler implements ConfigHandler {
 
  public void config(String name, String remote_addr, int listen_on, String log_dir, Properties[] filter_configs)
  {
-	info("configuring(name:" + name + ", remote_addr:" + remote_addr + ", listen_on:" + listen_on + ", log_dir:" + log_dir + ", and " + filter_configs.length + " filter configs");
 	try
 	{
 	 final Route route = new Route(name, listen_on, remote_addr, new File(working_directory, log_dir), filter_configs);
@@ -101,9 +83,8 @@ class MainConfigHandler implements ConfigHandler {
 	 {
 		routes.add(route);
 	 }
-	 info(name + " route constructed.");
 	 new Thread(route, name).start();
-	 info(name + " route thread started.");
+	 info(name + " route started.");
 	}
 	catch (IOException e)
 	{
@@ -122,19 +103,9 @@ class MainConfigHandler implements ConfigHandler {
 	log("INFO", msg);
  }
 
- private void debug(final String msg)
- {
-	log("DEBUG", msg);
- }
-
  private void error(final String msg)
  {
 	log("ERROR", msg);
- }
-
- private void warn(final String msg)
- {
-	log("WARN", msg);
  }
 
 }

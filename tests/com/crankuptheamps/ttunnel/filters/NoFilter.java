@@ -23,7 +23,7 @@ public class NoFilter  extends Filter {
     }
 
     private void log(final String msg) {
-//        System.out.println("[[[[[NoFilter-" + Thread.currentThread().getName() + "-" + this.hashCode() + ": " + msg + "]]]]");
+//        System.out.debug("[[[[[NoFilter-" + Thread.currentThread().getName() + "-" + this.hashCode() + ": " + msg + "]]]]");
 //        System.out.flush();
     }
 

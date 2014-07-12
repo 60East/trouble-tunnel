@@ -31,7 +31,6 @@ public class RandomBitFilter extends Filter {
             try {
                 ret = table[datum][r.nextInt(8)];
             } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("datum=" + datum + "table.length=" + table.length);
                 throw e;
             }
         }

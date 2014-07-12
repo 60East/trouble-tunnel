@@ -58,7 +58,8 @@ public class MockConnectionProcessor implements ConnectionProcessor {
     }
 
     public ConnectionLogger get_logger() {
-        throw new RuntimeException("not implemented");
+        return new ConsoleConnectionLogger("bogus_route", 0);
+        //throw new RuntimeException("not implemented");
     }
 
 }

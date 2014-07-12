@@ -15,7 +15,7 @@ public class ConnectionLoggerImpl implements ConnectionLogger {
     final Logger logger = Logger.getLogger(ConnectionLoggerImpl.class.getName());
 
     ConnectionLoggerImpl(final File log_dir, final String route_name, final Integer connection_id) {
-        System.out.println("ConnectionLoggerImpl.<init>(" + log_dir + ", " + route_name + ", " + connection_id + ")");
+        // System.out.debug("ConnectionLoggerImpl.<init>(" + log_dir + ", " + route_name + ", " + connection_id + ")");
 
 		 if (!log_dir.exists())
 		 {
@@ -62,19 +62,19 @@ public class ConnectionLoggerImpl implements ConnectionLogger {
     public void debug(final String msg) {
         if(disabled) return;
         else logger.log(Level.FINE, msg);
-        System.out.println(route_name + "-" + connection_id + "[debug]: " + msg);
+        // System.out.debug(route_name + "-" + connection_id + "[debug]: " + msg);
     }
 
     public void info(final String msg) {
         if(disabled) return;
         else logger.info(msg);
-        System.out.println(route_name + "-" + connection_id + "[info]: " + msg);
+        // System.out.debug(route_name + "-" + connection_id + "[info]: " + msg);
     }
 
     public void warn(final String msg) {
         if(disabled) return;
         else logger.warning(msg);
-        System.out.println(route_name + "-" + connection_id + "[warn]: " + msg);
+        // System.out.debug(route_name + "-" + connection_id + "[warn]: " + msg);
     }
 
     public void entering(final String name, final Object o, String ... args) {

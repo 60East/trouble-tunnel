@@ -64,8 +64,7 @@ public class DisconnectFilter extends Filter {
  private void debug(final String msg)
  {
 	final String clname = getClass().getName().substring(getClass().getName().lastIndexOf('.') + 1);
-	System.out.println("[DEBUG] " + clname + "-" + hashCode() + msg);
-	System.out.flush();
+    getConnectionProcessor().get_logger().debug(clname + "-" + hashCode() + msg);
  }
 
 }

@@ -83,7 +83,7 @@ public class SearchFilter extends Filter {
                 System.arraycopy(processed, 0, b, off, processed.length);
             } else if (action.equals(ACTION_PAUSE)) {
                 try {
-                    System.err.println("pausing for " + pause_duration + "ms");
+                    getConnectionProcessor().get_logger().info("pausing for " + pause_duration + "ms");
                     Thread.sleep(pause_duration);
                 } catch (InterruptedException e) {
                     getConnectionProcessor().get_logger().warn(StringUtils.get_stack(e));
@@ -123,8 +123,8 @@ public class SearchFilter extends Filter {
         return retval;
     }
 
-    public void println(String s) {
-        System.out.println(StringUtils.shortName(getClass()) + "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + s);
+    public void debug(String s) {
+        getConnectionProcessor().get_logger().debug(StringUtils.shortName(getClass()) + s);
     }
 
 }

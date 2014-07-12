@@ -7,16 +7,18 @@ import java.util.Map;
  */
 public interface ConnectionLogger {
 
-	public void enable();
-	public void disable();
-	public void debug(String msg);
-	public void info(String msg);
-	public void warn(String msg);
+    public void enable();
 
-	public void entering(final String name, final Object o, String ... args);
+    public void disable();
 
-		public void leaving(final String name, final Object o);
+    public void debug(String msg);
 
+    public void info(String msg);
 
+    public void warn(String msg);
 
-	}
+    public void entering(final String name, final Object o, String... args);
+
+    public void leaving(final String name, final Object o);
+
+}

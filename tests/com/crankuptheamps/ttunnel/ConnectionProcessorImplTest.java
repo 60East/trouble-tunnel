@@ -36,7 +36,7 @@ public class ConnectionProcessorImplTest {
         Thread t = new Thread(proc);
         t.start();
         t.join();
-//        System.out.println("output: '" + new String(localOut.toByteArray()) + "'");
+//        System.out.debug("output: '" + new String(localOut.toByteArray()) + "'");
         Assert.assertTrue(new String(localOut.toByteArray()).indexOf(expected_substring) != -1);
         Assert.assertEquals(proc.pipes[0].getStatistics().get("bytes_in"), proc.pipes[0].getStatistics().get("bytes_out"));
         Assert.assertEquals(proc.pipes[1].getStatistics().get("bytes_in"), proc.pipes[1].getStatistics().get("bytes_out"));
