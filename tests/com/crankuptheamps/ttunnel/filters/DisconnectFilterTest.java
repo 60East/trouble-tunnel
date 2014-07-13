@@ -57,7 +57,8 @@ public class DisconnectFilterTest {
             Thread.sleep(min_uptime);
         }
         final long age = System.currentTimeMillis() - started;
-        Assert.assertTrue("age=" + age + " max_uptime=" + max_uptime + " min_uptime=" + min_uptime, age < max_uptime && age > min_uptime);
+        Assert.assertTrue("older than min_uptime   ... age=" + age + " max_uptime=" + max_uptime + " min_uptime=" + min_uptime, age > min_uptime);
+        Assert.assertTrue("younger than max_uptime ... age=" + age + " max_uptime=" + max_uptime + " min_uptime=" + min_uptime, age < max_uptime);
     }
     @Test
     public void testDisconnectDueToMax() throws Exception {
