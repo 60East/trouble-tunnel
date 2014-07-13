@@ -68,7 +68,7 @@ public abstract class TroubleTest {
     @Before
     public void start_tunnel() throws Exception {
 
-        props.load(new FileReader(props_file));
+        props.load(new FileInputStream(props_file));
 
         try {
             if (tunnel_main != null) return;
