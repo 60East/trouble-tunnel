@@ -256,19 +256,19 @@ Our implementation of `ExampleTest` uses `./work-dir` as a working directory.  T
     <working-directory>/<abbreviated-class-name>.properties
 	This is a plain old java.util.Properties file.  You'll be able to refer to its key/value pairs from the next file:  For example:
 
-    
+
     b_local_port=8989
     b_remote_port=80
     b_remote_host=www.google.com
     b_latency=1000
     c_latency=2000
 
-    
+
     <working-directory>/<abbreviated-class-name>-template.json
     This is a TT configuration JSON file.  It can refer to values from the properties file by wrapping them in ${}.  For example:
-    
+
     [
-    
+
     	{"name": "here->B",
     		"listen_on":"${b_local_port}",
     		"remote_addr":"${b_remote_host}:${b_remote_port}",
@@ -280,7 +280,7 @@ Our implementation of `ExampleTest` uses `./work-dir` as a working directory.  T
     			}
     		]
     	},
-    
+
     	{"name": "here->C",
     		"listen_on":"9005",
     		"remote_addr":"C:9004",
@@ -292,7 +292,7 @@ Our implementation of `ExampleTest` uses `./work-dir` as a working directory.  T
     		  }
     		]
     	}
-    
+
     ]
 
 In our `ExampleTest` implementation, these actual location of these two files is `./work-dir/ExampleTest-template.json` and `./work-dir/ExampleTest.properties`.
