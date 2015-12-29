@@ -1,7 +1,5 @@
 <project name="TroubleTunnel" default="all" basedir=".">
 
-  <property name="version" value="1.0.0"/>
-
   <property name="build" location="${basedir}/build"/>
   <property name="results" location="${build}/results"/>
   <property name="reports" location="${build}/reports"/>
@@ -111,7 +109,7 @@
 
   </target>
 
-<property name="dist" value="${basedir}/trouble-tunnel-${version}"/>
+<property name="dist" value="${basedir}/trouble-tunnel"/>
 <property name="dist.jar" value="${dist}/trouble-tunnel.jar"/>
 <property name="build.apidocs" value="${build}/apidocs"/>
 
@@ -159,10 +157,10 @@
 
   <exec dir="${basedir}" executable="bash">
     <arg value="-c"/>
-    <arg value="tar czf trouble-tunnel-${version}.tgz trouble-tunnel-${version}"/>
+    <arg value="tar czf trouble-tunnel.tgz trouble-tunnel"/>
   </exec>
 
-  <move file="trouble-tunnel-${version}" tofile="dist"/>
+  <move file="trouble-tunnel" tofile="dist"/>
 
 </target>
 

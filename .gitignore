@@ -6,3 +6,5 @@ dist
 build
 trouble-tunnel-*
 *.log.*
+.orch/orch-toolbox
+.orch/artifacts
