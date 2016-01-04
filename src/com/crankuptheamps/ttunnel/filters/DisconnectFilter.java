@@ -28,6 +28,7 @@ public class DisconnectFilter extends Filter {
 	final long uptime = max_uptime > 0 ? min_uptime + random.nextInt((int) (max_uptime - min_uptime)) : 0;
 	final String clname = getClass().getName().substring(getClass().getName().lastIndexOf('.') + 1);
 	logger = new ConsoleConnectionLogger(clname, hashCode());
+    if (Boolean.parseBoolean(props.getProperty("silent"))) logger.disable();
 	debug("<init>() uptime=" + uptime + "ms");
 	new Thread(new Runnable() {
 	 public void run()
