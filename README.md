@@ -35,7 +35,7 @@ Building TT
 ===========
 
 TT requires:
-+ Java 1.6 or later
++ Java 17 or later
 + ant
 
 Clone the TT repository, navigate to the root directory, and type
@@ -65,8 +65,8 @@ Configuring TT
 TT uses JSON-format files for configuration.  Each entry in the JSON file
 defines a *route*. A route is:
 
-+ The local port for TT to listen on.
-+ The remote host and port for TT to forward network traffic to.
++ The local TCP port or Unix domain socket path for TT to listen on.
++ The remote TCP host/port or Unix domain socket path for TT to forward network traffic to.
 + Filters for TT to apply to traffic on the route. Filters are how TT causes
   trouble.
 + Where to keep the log files for the route.
@@ -107,10 +107,38 @@ number of filters. (Technically, yeah, there's probably a limit, and you can
 probably find that limit if you want to. But it should be enough for any
 practical purpose.)
 
+The `listen_on` and `remote_addr` fields are still supported for TCP routes.
+New configurations may use explicit endpoint objects instead:
+
+    [
+      {"name": "tcp-to-tcp",
+       "listen": {"type": "tcp", "port": 9004},
+       "remote": {"type": "tcp", "host": "B", "port": 9004},
+       "log_dir": "log-tcp"
+      },
+
+      {"name": "uds-to-tcp",
+       "listen": {"type": "unix", "path": "/tmp/ttunnel-in.sock", "unlink_existing": true},
+       "remote": {"type": "tcp", "host": "B", "port": 9004},
+       "log_dir": "log-uds"
+      },
+
+      {"name": "tcp-to-uds",
+       "listen": {"type": "tcp", "port": 9005},
+       "remote": {"type": "unix", "path": "/tmp/backend.sock"},
+       "log_dir": "log-tcp-uds"
+      }
+    ]
+
+Unix domain socket support requires Java 17 and an operating system that
+supports filesystem Unix domain sockets. TT removes a Unix listener socket path
+when the route stops. If the path already exists at startup, TT fails unless
+`unlink_existing` is set to `true` on the Unix listener endpoint.
+
 Need a formal definition? The JSON file contains an array. Each element of the
-array is a map that defines a route. A route needs a `name`, a port to `listen_on`, and a
-`remote_addr` to forward traffic to. Each route may have a `log_dir` and a
-`filters` array.
+array is a map that defines a route. A route needs a `name`, either `listen_on`
+or `listen`, and either `remote_addr` or `remote`. Each route may have a
+`log_dir` and a `filters` array.
 
 Each entry on th `filters` array is a map and must at least have a `type` value.
 
@@ -314,4 +342,3 @@ You can access your properties file contents directly from within your tests by 
 		}
 
 This is useful in preventing duplication of configurable values like port numbers or Filter configuration values like latencies in your code.
-

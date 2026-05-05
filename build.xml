@@ -25,7 +25,7 @@
 </path>
 
 <target name="compile" depends="init">
-  <javac debug="true" debuglevel="lines,vars,source" includeantruntime="false"  srcdir="${src}" destdir="${classes}" classpathref="compile.path">
+  <javac debug="true" debuglevel="lines,vars,source" includeantruntime="false" release="17"  srcdir="${src}" destdir="${classes}" classpathref="compile.path">
     <compilerarg value="-Xlint:-path"/>
     <compilerarg value="-Xlint:-unchecked"/>
   </javac>
@@ -44,7 +44,7 @@
 
 
 <target name="test.compile" depends="compile">
-  <javac debug="true" debuglevel="lines,vars,source" includeantruntime="false"  srcdir="${test-src}" destdir="${test-classes}" classpathref="test.compile.path">
+  <javac debug="true" debuglevel="lines,vars,source" includeantruntime="false" release="17"  srcdir="${test-src}" destdir="${test-classes}" classpathref="test.compile.path">
     <compilerarg value="-Xlint:-path"/>
     <compilerarg value="-Xlint:-unchecked"/>
   </javac>
@@ -110,7 +110,7 @@
   </target>
 
 <property name="dist" value="${basedir}/trouble-tunnel"/>
-<property name="dist.jar" value="${dist}/trouble-tunnel.jar"/>
+<property name="dist.jar" value="${dist}/trouble-tunnel-1.1.0.jar"/>
 <property name="build.apidocs" value="${build}/apidocs"/>
 
   <target name="clean" >

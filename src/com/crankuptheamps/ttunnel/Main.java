@@ -74,11 +74,11 @@ class MainConfigHandler implements ConfigHandler {
 	this.routes = routes;
  }
 
- public void config(String name, String remote_addr, int listen_on, String log_dir, Properties[] filter_configs)
+ public void config(String name, EndpointSpec listen, EndpointSpec remote, String log_dir, Properties[] filter_configs)
  {
 	try
 	{
-	 final Route route = new Route(name, listen_on, remote_addr, new File(working_directory, log_dir), filter_configs);
+	 final Route route = new Route(name, listen, remote, new File(working_directory, log_dir), filter_configs);
 	 synchronized (routes)
 	 {
 		routes.add(route);

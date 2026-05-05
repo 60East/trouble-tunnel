@@ -2,43 +2,36 @@ package com.crankuptheamps.ttunnel;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
 
 public class Route implements Runnable {
 
-    private final int local_port;
-    private final int remote_port;
+    private final EndpointSpec listenEndpoint;
+    private final EndpointSpec remoteEndpoint;
     public final String name;
-    private final String remote_hostname;
-    private  FilterFactory filterFactory;
     private final Properties[] filterConfigs;
     private final File log_dir;
     private final ConnectionLoggerImpl logger;
+    private final RouteTransportFactory transportFactory = new RouteTransportFactory();
 
 
     /**
      *
      * @param name
-     * @param local_port
-     * @param remote_address
+     * @param listenEndpoint
+     * @param remoteEndpoint
      * @param filterConfigs
      * @throws IOException - if there's trouble initializing logging system
      */
-    public Route(final String name, final int local_port,
-                 final String remote_address,final File log_dir,
+    public Route(final String name, final EndpointSpec listenEndpoint,
+                 final EndpointSpec remoteEndpoint, final File log_dir,
                  final Properties[] filterConfigs) throws IOException {
 
         this.name = name;
-        if (remote_address.indexOf(":") == -1) {
-            throw new Error("port missing in remote address, expected <hostname>:<port>: " + remote_address);
-        }
-        this.remote_hostname= remote_address.substring(0, remote_address.indexOf(":"));
-        this.remote_port= Integer.parseInt(remote_address.substring(remote_address.indexOf(":")+1, remote_address.length()));
-        this.local_port = local_port;
+        this.listenEndpoint = listenEndpoint;
+        this.remoteEndpoint = remoteEndpoint;
         this.filterConfigs = filterConfigs;
         this.log_dir = log_dir;
         logger = new ConnectionLoggerImpl(log_dir, name, 0);
@@ -46,7 +39,7 @@ public class Route implements Runnable {
     }
 
     private boolean stopped = false;
-    private ServerSocket serverSocket;
+    private RouteListener listener;
     private final List<ConnectionProcessor> processors = new LinkedList<ConnectionProcessor>();
 
     public synchronized void stop() {
@@ -62,13 +55,13 @@ public class Route implements Runnable {
 	    }
 	}
 
-	if (serverSocket != null) {
+	if (listener != null) {
 	    try
 		{
-		    serverSocket.close();
-		    info("Route-" + hashCode() + " serverSocket closed");
-		    serverSocket = null;
-		    info("Route-" + hashCode() + " serverSocket: " + serverSocket);
+		    listener.close();
+		    info("Route-" + hashCode() + " listener closed");
+		    listener = null;
+		    info("Route-" + hashCode() + " listener: " + listener);
 		} catch (IOException e) {
 		warn("in Route.stop(): " + e.getMessage());
 	    }
@@ -86,23 +79,23 @@ public class Route implements Runnable {
         try {
             while (!stopped()) {
                 try {
-		    if (serverSocket == null) {
-			info("Thread-" + Thread.currentThread().hashCode() + " Route-" + hashCode() + " constructing new ServerSocket on port " + local_port);
-			serverSocket = new ServerSocket(local_port);
+		    if (listener == null) {
+			info("Thread-" + Thread.currentThread().hashCode() + " Route-" + hashCode() + " constructing new listener on " + listenEndpoint);
+			listener = transportFactory.listener(listenEndpoint);
 		    }
-                    Socket localSocket, remoteSocket;
+                    RouteConnection localConnection, remoteConnection;
                     try {
-                        info("waiting for connection to serversocket on port " + local_port);
+                        info("waiting for connection on " + listenEndpoint);
 			info("Thread-" + Thread.currentThread().hashCode() + " Route-" + hashCode() + " calling accept()");
-                        localSocket = serverSocket.accept();
-                        info("connection received on port " + local_port);
-                        info("connecting to remote socket: host: " + remote_hostname + ", port: " + remote_port);
-                        remoteSocket = new Socket(remote_hostname, remote_port);
-                        info("remote socket connected, constructing connection processor ...");
-                        final ConnectionProcessorImpl proc = new ConnectionProcessorImpl(localSocket.getInputStream(),
-											 localSocket.getOutputStream(),
-											 remoteSocket.getInputStream(),
-											 remoteSocket.getOutputStream(),
+                        localConnection = listener.accept();
+                        info("connection received on " + listenEndpoint);
+                        info("connecting to remote endpoint: " + remoteEndpoint);
+                        remoteConnection = transportFactory.connector(remoteEndpoint).connect();
+                        info("remote endpoint connected, constructing connection processor ...");
+                        final ConnectionProcessorImpl proc = new ConnectionProcessorImpl(localConnection.input(),
+											 localConnection.output(),
+											 remoteConnection.input(),
+											 remoteConnection.output(),
 											 this.name,
 											 this.log_dir,
 											 filterConfigs);
@@ -112,10 +105,10 @@ public class Route implements Runnable {
                         info("connection processor impl thread started.");
 			//proc.run();
                     } catch (java.net.SocketException ignored) {
-			// happens if the serverSocket is closed while we're blocking on accept()
+			// happens if the listener is closed while we're blocking on accept()
                     }
                 } catch (IOException e) {
-		    // thrown by ServerSocket construction
+		    // thrown by listener construction
 		    warn("Route-" + hashCode() + " run() catch #2: " + e.getMessage());
                 }
 
@@ -140,4 +133,3 @@ public class Route implements Runnable {
 
 
 }
-
