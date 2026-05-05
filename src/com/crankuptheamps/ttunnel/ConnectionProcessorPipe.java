@@ -23,13 +23,11 @@ public class ConnectionProcessorPipe implements ConnectionProcessor, Runnable {
         this.logger = logger;
     }
 
-    
-    public void disconnect(){
+    public void disconnect() {
         try {
             instream.close();
             outstream.close();
         } catch(IOException e) {
-
         }
     }
 
@@ -56,6 +54,7 @@ public class ConnectionProcessorPipe implements ConnectionProcessor, Runnable {
             if (!egress_paused) {
                 get_logger().warn("resuming egress but egress not paused");
             }
+
             egress_paused = false;
         }
     }
@@ -79,6 +78,7 @@ public class ConnectionProcessorPipe implements ConnectionProcessor, Runnable {
             if (!ingress_paused) {
                 get_logger().warn("resuming ingress but ingress not paused");
             }
+
             ingress_paused = false;
         }
     }
@@ -90,34 +90,31 @@ public class ConnectionProcessorPipe implements ConnectionProcessor, Runnable {
     }
 
     private Boolean logging_enabled = false;
-    
+
     public void start_logging() {
         synchronized(logging_enabled) {
             logging_enabled = true;
         }
-
     }
 
-    
     public void stop_logging() {
         synchronized (logging_enabled) {
             logging_enabled = false;
         }
     }
 
-	public ConnectionLogger get_logger()
-	{
-		return logger;
-	}
+    public ConnectionLogger get_logger() {
+        return logger;
+    }
 
-	private boolean logging_enabled() {
+    private boolean logging_enabled() {
         synchronized (logging_enabled) {
             return logging_enabled;
         }
     }
 
     private long bytes_in, bytes_out, read_ms, write_ms, read_count,  write_count, began_at, ended_at, exception_at;
-    
+
     public Map<String, Long> getStatistics() {
         final Map<String, Long> stat = new HashMap<String, Long>(6);
         stat.put("bytes_in",   bytes_in);
@@ -129,11 +126,9 @@ public class ConnectionProcessorPipe implements ConnectionProcessor, Runnable {
         stat.put("began_at", began_at);
         stat.put("ended_at", ended_at);
         stat.put("exception_at", exception_at);
-
         return stat;
     }
 
-    
     public void run() {
         logger.entering("run", this);
         began_at = System.currentTimeMillis();
@@ -141,47 +136,53 @@ public class ConnectionProcessorPipe implements ConnectionProcessor, Runnable {
         int cursor = 0;
         boolean input_ended = false;
         final Timer in_timer = new Timer(), out_timer = new Timer();
+
         try {
             while (exception == null && !input_ended) {
                 final int space_remaining = buffer.length - cursor;
-                    if (!ingress_paused() && !input_ended && space_remaining > 0) {
-                        in_timer.begin();
-                        try {
-                            final int bytesRead = instream.read(buffer, cursor, space_remaining);
-                            if (bytesRead == -1) {
-                                input_ended = true;
-                            } else {
-                                cursor += bytesRead;
-                                bytes_in += bytesRead;
-                            }
-                        } finally {
-                            read_ms += in_timer.end();
-                            ++read_count;
+
+                if (!ingress_paused() && !input_ended && space_remaining > 0) {
+                    in_timer.begin();
+
+                    try {
+                        final int bytesRead = instream.read(buffer, cursor, space_remaining);
+
+                        if (bytesRead == -1) {
+                            input_ended = true;
+                        } else {
+                            cursor += bytesRead;
+                            bytes_in += bytesRead;
                         }
+                    } finally {
+                        read_ms += in_timer.end();
+                        ++read_count;
                     }
-                    if (!egress_paused() && cursor > 0) {
-                        out_timer.begin();
-                        outstream.write(buffer, 0, cursor);
-                        outstream.flush();
-                        write_ms += out_timer.end();
-                        bytes_out += cursor;
-                        cursor = 0;
-                        ++write_count;
-                    }
+                }
+
+                if (!egress_paused() && cursor > 0) {
+                    out_timer.begin();
+                    outstream.write(buffer, 0, cursor);
+                    outstream.flush();
+                    write_ms += out_timer.end();
+                    bytes_out += cursor;
+                    cursor = 0;
+                    ++write_count;
+                }
             }
         } catch (IOException e) {
             onException(e);
         } finally {
             ended_at = System.currentTimeMillis();
         }
+
         logger.leaving("run", this);
     }
-
 
     private Exception exception;
     public Exception getException() {
         return exception;
     }
+
     private void onException(Exception e) {
         exception_at = System.currentTimeMillis();
         this.exception = e;
@@ -193,10 +194,12 @@ class Timer {
     public void begin() {
         started = System.currentTimeMillis();
     }
+
     public long end() {
         if (started == 0) {
             throw new Error("trying to end but never started.");
         }
+
         final long duration = System.currentTimeMillis() - started;
         started = 0;
         return duration;

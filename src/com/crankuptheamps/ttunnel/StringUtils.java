@@ -9,19 +9,25 @@ import java.util.StringTokenizer;
 public class StringUtils {
     public static String join(final String[] args, final String delimiter) {
         final StringBuffer sb = new StringBuffer();
+
         for (int i = 0 ; i < args.length ; ++i) {
             sb.append(args[i]);
+
             if (i+1 < args.length) sb.append(delimiter);
         }
+
         return sb.toString();
     }
 
     public static String join(final Iterator<String> strings, final String delimiter) {
         final StringBuffer sb = new StringBuffer();
+
         while (strings.hasNext()) {
             sb.append(strings.next());
+
             if (strings.hasNext()) sb.append(delimiter);
         }
+
         return sb.toString();
     }
 
@@ -39,9 +45,11 @@ public class StringUtils {
         final String[] tokens = lipsum().split(" ");
         final Random r = new Random();
         final StringBuilder sb = new StringBuilder();
+
         while (sb.length() < len) {
             sb.append(tokens[r.nextInt(tokens.length)] + " ");
         }
+
         return sb.toString().substring(0, len);
     }
 

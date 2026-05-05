@@ -1,0 +1,15 @@
+[
+    {
+        "name": "uds-and-filter",
+        "log_dir": ".",
+        "listen": {"type": "unix", "path": "./uds-listen.sock", "unlink_existing": true},
+        "remote": {"type": "unix", "path": "./uds-remote.sock", "unlink_existing": true},
+        "filters": [
+            {
+                "type": "Wan",
+                "description": "WAN UDS",
+                "median_latency": 1000
+            }
+        ]
+    }
+]

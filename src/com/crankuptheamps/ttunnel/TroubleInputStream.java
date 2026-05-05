@@ -17,35 +17,39 @@ public class TroubleInputStream extends FilterInputStream {
         hasFilters = filters != null && filters.length > 0;
     }
 
-
     public int read() throws IOException {
         int ret = super.read();
+
         if (ret != -1 && hasFilters) {
             for (int i = 0; i < filters.length; ++i) {
                 ret = filters[i].filter(ret);
             }
         }
+
         return ret;
     }
 
     public int read(byte[] b, int off, int len) throws IOException {
         int ret = super.read(b, off, len);
+
         if (ret != -1 && hasFilters) {
             for (Filter f : filters) {
                 ret = f.filter(b, off, ret);
             }
         }
+
         return ret;
     }
 
-
     public int read(byte[] b) throws IOException {
         int ret = super.read(b);
+
         if (ret != -1 && hasFilters) {
             for (int i = 0; i < filters.length; ++i) {
                 ret = filters[i].filter(b, 0, ret);
             }
         }
+
         return ret;
     }
 

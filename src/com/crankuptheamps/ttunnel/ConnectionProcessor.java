@@ -24,7 +24,7 @@ public interface ConnectionProcessor {
 
     public void stop_logging();
 
-		public ConnectionLogger get_logger();
+    public ConnectionLogger get_logger();
 
     public Exception  getException();
 
