@@ -8,10 +8,6 @@ import java.util.Properties;
 
 public class ConfigParserTest {
 
-    public ConfigParserTest() {
-
-    }
-
     @Test
     public void testParse() throws Exception {
         final ConfigParser cp = new ConfigParser();
@@ -46,4 +42,119 @@ public class ConfigParserTest {
         });
     }
 
+    @Test
+    public void testParseTCPToTCP() throws Exception {
+        final ConfigParser cp = new ConfigParser();
+        cp.parse(new File("tests/sample-config-1.1.0.json"), new ConfigHandler() {
+            public void config(String name, EndpointSpec listen, EndpointSpec remote, String log_dir,
+                    Properties[] filter_configs) {
+                if (name.equals("tpc-to-tpc")) {
+                    Assert.assertEquals(EndpointSpec.Type.TCP, listen.getType());
+                    Assert.assertEquals(9004, listen.getPort());
+                    Assert.assertEquals(EndpointSpec.Type.TCP, remote.getType());
+                    Assert.assertEquals(9004, remote.getPort());
+                    Assert.assertEquals("B", remote.getHost());
+                    Assert.assertEquals(".", log_dir);
+                }
+            }
+        });
+    }
+
+    @Test
+    public void testParseTPCToUDS() throws Exception {
+        final ConfigParser cp = new ConfigParser();
+        cp.parse(new File("tests/sample-config-1.1.0.json"), new ConfigHandler() {
+            public void config(String name, EndpointSpec listen, EndpointSpec remote, String log_dir,
+                    Properties[] filter_configs) {
+                if (name.equals("tpc-to-uds")) {
+                    Assert.assertEquals(EndpointSpec.Type.TCP, listen.getType());
+                    Assert.assertEquals(9004, listen.getPort());
+                    Assert.assertEquals(EndpointSpec.Type.UNIX, remote.getType());
+                    Assert.assertEquals("./uds-remote.sock", remote.getPath().toString());
+                    Assert.assertTrue(remote.isUnlinkExisting());
+                    Assert.assertEquals(".", log_dir);
+                }
+            }
+        });
+    }
+    
+    @Test
+    public void testParseUDSToTCP() throws Exception {
+        final ConfigParser cp = new ConfigParser();
+        cp.parse(new File("tests/sample-config-1.1.0.json"), new ConfigHandler() {
+            public void config(String name, EndpointSpec listen, EndpointSpec remote, String log_dir,
+                    Properties[] filter_configs) {
+                if (name.equals("uds-to-tcp")) {
+                    Assert.assertEquals(EndpointSpec.Type.UNIX, listen.getType());
+                    Assert.assertEquals("./uds-listen.sock", listen.getPath().toString());
+                    Assert.assertTrue(listen.isUnlinkExisting());
+                    Assert.assertEquals(EndpointSpec.Type.TCP, remote.getType());
+                    Assert.assertEquals(9004, remote.getPort());
+                    Assert.assertEquals("B", remote.getHost());
+                    Assert.assertEquals(".", log_dir);
+                }
+            }
+        });
+    }
+    
+    @Test
+    public void testParseUDSToUDS() throws Exception {
+        final ConfigParser cp = new ConfigParser();
+        cp.parse(new File("tests/sample-config-1.1.0.json"), new ConfigHandler() {
+            public void config(String name, EndpointSpec listen, EndpointSpec remote, String log_dir,
+                    Properties[] filter_configs) {
+                if (name.equals("uds-to-uds")) {
+                    Assert.assertEquals(EndpointSpec.Type.UNIX, listen.getType());
+                    Assert.assertEquals("./uds-listen.sock", listen.getPath().toString());
+                    Assert.assertTrue(listen.isUnlinkExisting());
+                    Assert.assertEquals(EndpointSpec.Type.UNIX, remote.getType());
+                    Assert.assertEquals("./uds-remote.sock", remote.getPath().toString());
+                    Assert.assertTrue(remote.isUnlinkExisting());
+                    Assert.assertEquals(".", log_dir);
+                }
+            }
+        });
+    }
+    
+    @Test
+    public void testParseUDSToUDSFalseAndMissingUnlinkExisting() throws Exception {
+        final ConfigParser cp = new ConfigParser();
+        cp.parse(new File("tests/sample-config-1.1.0.json"), new ConfigHandler() {
+            public void config(String name, EndpointSpec listen, EndpointSpec remote, String log_dir,
+                    Properties[] filter_configs) {
+                if (name.equals("uds-to-uds-unlink-existing")) {
+                    Assert.assertEquals(EndpointSpec.Type.UNIX, listen.getType());
+                    Assert.assertEquals("./uds-listen.sock", listen.getPath().toString());
+                    Assert.assertFalse(listen.isUnlinkExisting());
+                    Assert.assertEquals(EndpointSpec.Type.UNIX, remote.getType());
+                    Assert.assertEquals("./uds-remote.sock", remote.getPath().toString());
+                    Assert.assertFalse(remote.isUnlinkExisting());
+                    Assert.assertEquals(".", log_dir);
+                }
+            }
+        });
+    }
+
+    @Test
+    public void testParseLogDirAndFilter() throws Exception {
+        final ConfigParser cp = new ConfigParser();
+        cp.parse(new File("tests/sample-config-1.1.0.json"), new ConfigHandler() {
+            public void config(String name, EndpointSpec listen, EndpointSpec remote, String log_dir,
+                    Properties[] filter_configs) {
+                if (name.equals("log-dir-and-filter")) {
+                    Assert.assertEquals(EndpointSpec.Type.UNIX, listen.getType());
+                    Assert.assertEquals("./uds-listen.sock", listen.getPath().toString());
+                    Assert.assertTrue(listen.isUnlinkExisting());
+                    Assert.assertEquals(EndpointSpec.Type.UNIX, remote.getType());
+                    Assert.assertEquals("./uds-remote.sock", remote.getPath().toString());
+                    Assert.assertTrue(remote.isUnlinkExisting());
+                    Assert.assertEquals(".", log_dir);
+                    Assert.assertEquals(1, filter_configs.length);
+                    Assert.assertEquals("Wan", filter_configs[0].getProperty("type"));
+                    Assert.assertEquals("WAN UDS", filter_configs[0].getProperty("description"));
+                    Assert.assertEquals("1000", filter_configs[0].getProperty("median_latency"));
+                }
+            }
+        });
+    }
 }

@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.io.File;
 import java.net.Socket;
+import java.util.HashSet;
 import java.util.Iterator;
 
 public class ExampleTest extends TroubleTest {
@@ -70,12 +71,18 @@ public class ExampleTest extends TroubleTest {
  @Test
  public void test_config_keys()
  {
-	final StringBuffer s = new StringBuffer();
-	for (Iterator i = configKeys(); i.hasNext(); )
+	HashSet<String> set = new HashSet<>();
+    for (Iterator i = configKeys(); i.hasNext(); )
 	{
-	 s.append("<" + i.next().toString() + ">");
+        set.add(i.next().toString());
 	}
-	Assert.assertEquals(s.toString(), "<b_remote_host><c_latency><b_latency><b_local_port><b_remote_port>");
+    // Check the placeholders in ExampleTest-template.json
+	Assert.assertTrue(set.contains("b_remote_host"));
+	Assert.assertTrue(set.contains("c_latency"));
+	Assert.assertTrue(set.contains("b_latency"));
+	Assert.assertTrue(set.contains("b_local_port"));
+	Assert.assertTrue(set.contains("b_remote_port"));
+    Assert.assertEquals(5, set.size());
  }
 
 }
