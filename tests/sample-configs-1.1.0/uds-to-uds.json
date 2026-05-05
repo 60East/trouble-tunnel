@@ -1,0 +1,8 @@
+[
+    {
+        "name": "uds-to-uds",
+        "log_dir": ".",
+        "listen": {"type": "unix", "path": "./uds-listen.sock", "unlink_existing": true},
+        "remote": {"type": "unix", "path": "./uds-remote.sock", "unlink_existing": true}
+    }
+]

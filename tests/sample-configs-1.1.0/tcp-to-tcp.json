@@ -1,0 +1,8 @@
+[
+    {
+        "name": "tpc-to-tpc",
+        "log_dir": ".",
+        "listen": {"type": "tcp", "port": 9004},
+        "remote": {"type": "tcp", "port": 9004, "host": "B"}
+    }
+]

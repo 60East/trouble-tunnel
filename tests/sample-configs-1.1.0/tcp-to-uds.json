@@ -1,0 +1,8 @@
+[
+    {
+        "name": "tcp-to-uds",
+        "log_dir": ".",
+        "listen": {"type": "tcp", "port": 9004},
+        "remote": {"type": "unix", "path": "./uds-remote.sock", "unlink_existing": true}
+    }
+]
