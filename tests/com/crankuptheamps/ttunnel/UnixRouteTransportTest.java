@@ -61,13 +61,10 @@ public class UnixRouteTransportTest {
     @Test
     public void createsParentDirectoriesForSocketPath() throws Exception {
         final Path socketPath = socketPath("nested/listener.sock");
-        UnixRouteListener listener = null;
-        try {
-            listener = new UnixRouteListener(EndpointSpec.unix(socketPath, false));
+        
+        try (UnixRouteListener listener = new UnixRouteListener(EndpointSpec.unix(socketPath, false));) {
             Assert.assertTrue(Files.isDirectory(socketPath.getParent()));
             Assert.assertTrue(Files.exists(socketPath));
-        } finally {
-            close(listener);
         }
     }
 
@@ -76,7 +73,7 @@ public class UnixRouteTransportTest {
         final Path socketPath = socketPath("existing.sock");
         Files.createFile(socketPath);
 
-        new UnixRouteListener(EndpointSpec.unix(socketPath, false));
+        try (UnixRouteListener listener = new UnixRouteListener(EndpointSpec.unix(socketPath, false));) {}
     }
 
     @Test
@@ -84,43 +81,36 @@ public class UnixRouteTransportTest {
         final Path socketPath = socketPath("replace.sock");
         Files.createFile(socketPath);
 
-        UnixRouteListener listener = null;
-        try {
-            listener = new UnixRouteListener(EndpointSpec.unix(socketPath, true));
+        try (UnixRouteListener listener = new UnixRouteListener(EndpointSpec.unix(socketPath, true));) {
             Assert.assertTrue(Files.exists(socketPath));
-        } finally {
-            close(listener);
         }
     }
 
     @Test
     public void deletesSocketPathOnClose() throws Exception {
         final Path socketPath = socketPath("close.sock");
-        final UnixRouteListener listener = new UnixRouteListener(EndpointSpec.unix(socketPath, false));
-
-        Assert.assertTrue(Files.exists(socketPath));
-        listener.close();
-        Assert.assertFalse(Files.exists(socketPath));
+        
+        try (UnixRouteListener listener = new UnixRouteListener(EndpointSpec.unix(socketPath, false));) {
+            Assert.assertTrue(Files.exists(socketPath));
+            listener.close();
+            Assert.assertFalse(Files.exists(socketPath));
+        }
     }
 
     @Test
     public void connectorConnectsToUnixListener() throws Exception {
         final Path socketPath = socketPath("connect.sock");
-        final UnixRouteListener listener = new UnixRouteListener(EndpointSpec.unix(socketPath, false));
         final ExecutorService executor = Executors.newSingleThreadExecutor();
-        RouteConnection serverConnection = null;
-        RouteConnection clientConnection = null;
-        try {
+        
+        try (UnixRouteListener listener = new UnixRouteListener(EndpointSpec.unix(socketPath, false));) {
             final Future<RouteConnection> accepted = acceptAsync(executor, listener);
-            clientConnection = new UnixRouteConnector(EndpointSpec.unix(socketPath, false)).connect();
-            serverConnection = accepted.get(5, TimeUnit.SECONDS);
-
-            Assert.assertNotNull(clientConnection);
-            Assert.assertNotNull(serverConnection);
+            
+            try (RouteConnection clientConnection = new UnixRouteConnector(EndpointSpec.unix(socketPath, false)).connect();
+                    RouteConnection serverConnection = accepted.get(5, TimeUnit.SECONDS);) {
+                Assert.assertNotNull(clientConnection);
+                Assert.assertNotNull(serverConnection);
+            }
         } finally {
-            close(clientConnection);
-            close(serverConnection);
-            close(listener);
             executor.shutdownNow();
         }
     }
@@ -128,25 +118,21 @@ public class UnixRouteTransportTest {
     @Test
     public void connectionCanSendBytesClientToServer() throws Exception {
         final Path socketPath = socketPath("client-to-server.sock");
-        final UnixRouteListener listener = new UnixRouteListener(EndpointSpec.unix(socketPath, false));
         final ExecutorService executor = Executors.newSingleThreadExecutor();
-        RouteConnection serverConnection = null;
-        RouteConnection clientConnection = null;
-        try {
+        
+        try (UnixRouteListener listener = new UnixRouteListener(EndpointSpec.unix(socketPath, false));) {
             final Future<RouteConnection> accepted = acceptAsync(executor, listener);
-            clientConnection = new UnixRouteConnector(EndpointSpec.unix(socketPath, false)).connect();
-            serverConnection = accepted.get(5, TimeUnit.SECONDS);
+            
+            try (RouteConnection clientConnection = new UnixRouteConnector(EndpointSpec.unix(socketPath, false)).connect();
+                    RouteConnection serverConnection = accepted.get(5, TimeUnit.SECONDS);) {
+                final byte[] sent = new byte[] { 1, 2, 3, 4, 5 };
+                final byte[] received = new byte[sent.length];
+                clientConnection.output().write(sent);
 
-            final byte[] sent = new byte[] { 1, 2, 3, 4, 5 };
-            final byte[] received = new byte[sent.length];
-            clientConnection.output().write(sent);
-
-            Assert.assertEquals(sent.length, serverConnection.input().read(received));
-            Assert.assertArrayEquals(sent, received);
+                Assert.assertEquals(sent.length, serverConnection.input().read(received));
+                Assert.assertArrayEquals(sent, received);
+            }
         } finally {
-            close(clientConnection);
-            close(serverConnection);
-            close(listener);
             executor.shutdownNow();
         }
     }
@@ -154,25 +140,21 @@ public class UnixRouteTransportTest {
     @Test
     public void connectionCanSendBytesServerToClient() throws Exception {
         final Path socketPath = socketPath("server-to-client.sock");
-        final UnixRouteListener listener = new UnixRouteListener(EndpointSpec.unix(socketPath, false));
         final ExecutorService executor = Executors.newSingleThreadExecutor();
-        RouteConnection serverConnection = null;
-        RouteConnection clientConnection = null;
-        try {
+        
+        try (UnixRouteListener listener = new UnixRouteListener(EndpointSpec.unix(socketPath, false));) {
             final Future<RouteConnection> accepted = acceptAsync(executor, listener);
-            clientConnection = new UnixRouteConnector(EndpointSpec.unix(socketPath, false)).connect();
-            serverConnection = accepted.get(5, TimeUnit.SECONDS);
+            
+            try (RouteConnection clientConnection = new UnixRouteConnector(EndpointSpec.unix(socketPath, false)).connect();
+                    RouteConnection serverConnection = accepted.get(5, TimeUnit.SECONDS);) {
+                final byte[] sent = new byte[] { 6, 7, 8, 9 };
+                final byte[] received = new byte[sent.length];
+                serverConnection.output().write(sent);
 
-            final byte[] sent = new byte[] { 6, 7, 8, 9 };
-            final byte[] received = new byte[sent.length];
-            serverConnection.output().write(sent);
-
-            Assert.assertEquals(sent.length, clientConnection.input().read(received));
-            Assert.assertArrayEquals(sent, received);
+                Assert.assertEquals(sent.length, clientConnection.input().read(received));
+                Assert.assertArrayEquals(sent, received);
+            }
         } finally {
-            close(clientConnection);
-            close(serverConnection);
-            close(listener);
             executor.shutdownNow();
         }
     }
@@ -180,23 +162,19 @@ public class UnixRouteTransportTest {
     @Test
     public void connectionCloseIsIdempotent() throws Exception {
         final Path socketPath = socketPath("idempotent-close.sock");
-        final UnixRouteListener listener = new UnixRouteListener(EndpointSpec.unix(socketPath, false));
         final ExecutorService executor = Executors.newSingleThreadExecutor();
-        RouteConnection serverConnection = null;
-        RouteConnection clientConnection = null;
-        try {
+        
+        try (UnixRouteListener listener = new UnixRouteListener(EndpointSpec.unix(socketPath, false));) {
             final Future<RouteConnection> accepted = acceptAsync(executor, listener);
-            clientConnection = new UnixRouteConnector(EndpointSpec.unix(socketPath, false)).connect();
-            serverConnection = accepted.get(5, TimeUnit.SECONDS);
-
-            clientConnection.close();
-            clientConnection.close();
-            serverConnection.close();
-            serverConnection.close();
+            
+            try (RouteConnection clientConnection = new UnixRouteConnector(EndpointSpec.unix(socketPath, false)).connect();
+                    RouteConnection serverConnection = accepted.get(5, TimeUnit.SECONDS);) {
+                clientConnection.close();
+                clientConnection.close();
+                serverConnection.close();
+                serverConnection.close();
+            }
         } finally {
-            close(clientConnection);
-            close(serverConnection);
-            close(listener);
             executor.shutdownNow();
         }
     }
@@ -214,16 +192,6 @@ public class UnixRouteTransportTest {
             testDirectory = Files.createTempDirectory("ttunnel-uds-test");
         }
         return testDirectory.resolve(name);
-    }
-
-    private static void close(final AutoCloseable closeable) {
-        if (closeable == null) {
-            return;
-        }
-        try {
-            closeable.close();
-        } catch (Exception ignored) {
-        }
     }
 
     private static void deleteRecursively(final Path path) throws IOException {
