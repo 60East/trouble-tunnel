@@ -3,6 +3,7 @@ package com.crankuptheamps.ttunnel;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Assume;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -22,6 +23,34 @@ public class UnixRouteTransportTest {
 
     private Path testDirectory;
 
+    @BeforeClass
+    public static void checkUnixDomainSocketsSupported() throws Exception {
+        Path directory = null;
+        Path socketPath = null;
+        
+        try {
+            directory = Files.createTempDirectory("ttunnel-uds-probe");
+            socketPath = directory.resolve("probe.sock");
+            
+            try (ServerSocketChannel channel = ServerSocketChannel.open(StandardProtocolFamily.UNIX);) {
+                channel.bind(UnixDomainSocketAddress.of(socketPath));
+            } catch (Throwable t) {
+                Assume.assumeNoException(t);
+            }
+        } finally {
+            if (socketPath != null) {
+                try {
+                    Files.deleteIfExists(socketPath);
+                } catch (IOException ignored) {}
+            }
+            if (directory != null) {
+                try {
+                    Files.deleteIfExists(directory);
+                } catch (IOException ignored) {}
+            }
+        }
+    }
+
     @After
     public void cleanUp() throws Exception {
         if (testDirectory != null) {
@@ -31,7 +60,6 @@ public class UnixRouteTransportTest {
 
     @Test
     public void createsParentDirectoriesForSocketPath() throws Exception {
-        assumeUnixDomainSocketsSupported();
         final Path socketPath = socketPath("nested/listener.sock");
         UnixRouteListener listener = null;
         try {
@@ -45,7 +73,6 @@ public class UnixRouteTransportTest {
 
     @Test(expected = IOException.class)
     public void failsWhenSocketPathExistsAndUnlinkExistingIsFalse() throws Exception {
-        assumeUnixDomainSocketsSupported();
         final Path socketPath = socketPath("existing.sock");
         Files.createFile(socketPath);
 
@@ -54,7 +81,6 @@ public class UnixRouteTransportTest {
 
     @Test
     public void replacesExistingSocketPathWhenUnlinkExistingIsTrue() throws Exception {
-        assumeUnixDomainSocketsSupported();
         final Path socketPath = socketPath("replace.sock");
         Files.createFile(socketPath);
 
@@ -69,7 +95,6 @@ public class UnixRouteTransportTest {
 
     @Test
     public void deletesSocketPathOnClose() throws Exception {
-        assumeUnixDomainSocketsSupported();
         final Path socketPath = socketPath("close.sock");
         final UnixRouteListener listener = new UnixRouteListener(EndpointSpec.unix(socketPath, false));
 
@@ -80,7 +105,6 @@ public class UnixRouteTransportTest {
 
     @Test
     public void connectorConnectsToUnixListener() throws Exception {
-        assumeUnixDomainSocketsSupported();
         final Path socketPath = socketPath("connect.sock");
         final UnixRouteListener listener = new UnixRouteListener(EndpointSpec.unix(socketPath, false));
         final ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -103,7 +127,6 @@ public class UnixRouteTransportTest {
 
     @Test
     public void connectionCanSendBytesClientToServer() throws Exception {
-        assumeUnixDomainSocketsSupported();
         final Path socketPath = socketPath("client-to-server.sock");
         final UnixRouteListener listener = new UnixRouteListener(EndpointSpec.unix(socketPath, false));
         final ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -130,7 +153,6 @@ public class UnixRouteTransportTest {
 
     @Test
     public void connectionCanSendBytesServerToClient() throws Exception {
-        assumeUnixDomainSocketsSupported();
         final Path socketPath = socketPath("server-to-client.sock");
         final UnixRouteListener listener = new UnixRouteListener(EndpointSpec.unix(socketPath, false));
         final ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -157,7 +179,6 @@ public class UnixRouteTransportTest {
 
     @Test
     public void connectionCloseIsIdempotent() throws Exception {
-        assumeUnixDomainSocketsSupported();
         final Path socketPath = socketPath("idempotent-close.sock");
         final UnixRouteListener listener = new UnixRouteListener(EndpointSpec.unix(socketPath, false));
         final ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -193,34 +214,6 @@ public class UnixRouteTransportTest {
             testDirectory = Files.createTempDirectory("ttunnel-uds-test");
         }
         return testDirectory.resolve(name);
-    }
-
-    private void assumeUnixDomainSocketsSupported() {
-        Path directory = null;
-        Path socketPath = null;
-        ServerSocketChannel channel = null;
-        try {
-            directory = Files.createTempDirectory("ttunnel-uds-probe");
-            socketPath = directory.resolve("probe.sock");
-            channel = ServerSocketChannel.open(StandardProtocolFamily.UNIX);
-            channel.bind(UnixDomainSocketAddress.of(socketPath));
-        } catch (Throwable t) {
-            Assume.assumeNoException(t);
-        } finally {
-            close(channel);
-            if (socketPath != null) {
-                try {
-                    Files.deleteIfExists(socketPath);
-                } catch (IOException ignored) {
-                }
-            }
-            if (directory != null) {
-                try {
-                    Files.deleteIfExists(directory);
-                } catch (IOException ignored) {
-                }
-            }
-        }
     }
 
     private static void close(final AutoCloseable closeable) {
