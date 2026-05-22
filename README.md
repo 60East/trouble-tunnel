@@ -133,7 +133,8 @@ New configurations may use explicit endpoint objects instead:
 Unix domain socket support requires Java 17 and an operating system that
 supports filesystem Unix domain sockets. TT removes a Unix listener socket path
 when the route stops. If the path already exists at startup, TT fails unless
-`unlink_existing` is set to `true` on the Unix listener endpoint.
+both `unlink_existing` is set to `true` on the Unix listener endpoint and
+the path is a Unix listener socket path.
 
 Need a formal definition? The JSON file contains an array. Each element of the
 array is a map that defines a route. A route needs a `name`, either `listen_on`

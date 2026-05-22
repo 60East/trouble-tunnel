@@ -75,16 +75,50 @@ public class UnixRouteTransportTest {
 
         try (UnixRouteListener listener = new UnixRouteListener(EndpointSpec.unix(socketPath, false));) {}
     }
+    
+    @Test(expected = IOException.class)
+    public void failsWhenSocketPathIsRegularFileAndUnlinkExistingIsTrue() throws Exception {
+        final Path socketPath = socketPath("regularFile.txt");
+        Files.createFile(socketPath);
+
+        try (UnixRouteListener listener = new UnixRouteListener(EndpointSpec.unix(socketPath, true));) {}
+    }
+    
+    @Test(expected = IOException.class)
+    public void failsWhenSocketPathIsDirectoryAndUnlinkExistingIsTrue() throws Exception {
+        socketPath("regularFile.txt");
+
+        try (UnixRouteListener listener = new UnixRouteListener(EndpointSpec.unix(testDirectory, true));) {}
+    }
+    
+    @Test(expected = IOException.class)
+    public void failsWhenSocketPathIsSymbolicLinkAndUnlinkExistingIsTrue() throws Exception {
+        final Path socketPath = socketPath("replace.sock");
+
+        UnixDomainSocketAddress address = UnixDomainSocketAddress.of(socketPath);
+
+        try (ServerSocketChannel serverChannel = ServerSocketChannel.open(StandardProtocolFamily.UNIX)) {
+            serverChannel.bind(address);
+            final Path symbolicLinkPath = testDirectory.resolve("link.sock");
+            Files.createSymbolicLink(symbolicLinkPath, socketPath);
+            try (UnixRouteListener listener = new UnixRouteListener(EndpointSpec.unix(symbolicLinkPath, true));) {}
+        }
+    }
 
     @Test
     public void replacesExistingSocketPathWhenUnlinkExistingIsTrue() throws Exception {
         final Path socketPath = socketPath("replace.sock");
-        Files.createFile(socketPath);
 
-        try (UnixRouteListener listener = new UnixRouteListener(EndpointSpec.unix(socketPath, true));) {
-            Assert.assertTrue(Files.exists(socketPath));
+        UnixDomainSocketAddress address = UnixDomainSocketAddress.of(socketPath);
+
+        try (ServerSocketChannel serverChannel = ServerSocketChannel.open(StandardProtocolFamily.UNIX)) {
+            serverChannel.bind(address);
+            try (UnixRouteListener listener = new UnixRouteListener(EndpointSpec.unix(socketPath, true));) {
+                Assert.assertTrue(Files.exists(socketPath));
+            }
         }
     }
+
 
     @Test
     public void deletesSocketPathOnClose() throws Exception {
