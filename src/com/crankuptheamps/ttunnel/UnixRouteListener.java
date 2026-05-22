@@ -7,6 +7,9 @@ import java.nio.channels.ServerSocketChannel;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.nio.file.attribute.PosixFileAttributes;
+import java.nio.file.attribute.PosixFilePermission;
+import java.util.Set;
 
 public class UnixRouteListener implements RouteListener {
 
@@ -22,6 +25,8 @@ public class UnixRouteListener implements RouteListener {
 
         if (Files.exists(path)) {
             if (endpoint.isUnlinkExisting()) {
+                requirePrivateParentDirectory(path);
+                
                 try {
                     BasicFileAttributes attrs = Files.readAttributes(path, BasicFileAttributes.class);
 
@@ -51,7 +56,31 @@ public class UnixRouteListener implements RouteListener {
         try {
             channel.close();
         } finally {
+            requirePrivateParentDirectory(path);
             Files.deleteIfExists(path);
+        }
+    }
+
+    private static void requirePrivateParentDirectory(final Path path) throws IOException {
+        final Path parent = path.toAbsolutePath().getParent();
+
+        if (parent == null) {
+            throw new IOException("Unix domain socket path has no parent directory: " + path);
+        }
+
+        final PosixFileAttributes attrs;
+
+        try {
+            attrs = Files.readAttributes(parent, PosixFileAttributes.class);
+        } catch (UnsupportedOperationException e) {
+            throw new IOException("Cannot verify Unix domain socket parent directory permissions: " + parent, e);
+        }
+
+        final Set<PosixFilePermission> permissions = attrs.permissions();
+
+        if (permissions.contains(PosixFilePermission.GROUP_WRITE) ||
+            permissions.contains(PosixFilePermission.OTHERS_WRITE)) {
+            throw new IOException("Unix domain socket parent directory must not be writable by group or others: " + parent);
         }
     }
 }

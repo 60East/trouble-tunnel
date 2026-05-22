@@ -13,7 +13,10 @@ import java.nio.channels.ServerSocketChannel;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.attribute.PosixFilePermission;
+import java.util.EnumSet;
 import java.util.Properties;
+import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -104,6 +107,24 @@ public class UnixRouteTransportTest {
             Files.createSymbolicLink(symbolicLinkPath, socketPath);
             try (UnixRouteListener listener = new UnixRouteListener(EndpointSpec.unix(symbolicLinkPath, true));) {}
         }
+    }
+
+    @Test(expected = IOException.class)
+    public void failsWhenSocketParentCanBeModifiedByOtherUsers() throws Exception {
+        final Path unsafeParent = socketPath("unsafe-parent");
+        Files.createDirectory(unsafeParent);
+        setPermissionsOrSkip(unsafeParent, EnumSet.of(
+            PosixFilePermission.OWNER_READ,
+            PosixFilePermission.OWNER_WRITE,
+            PosixFilePermission.OWNER_EXECUTE,
+            PosixFilePermission.GROUP_READ,
+            PosixFilePermission.GROUP_WRITE,
+            PosixFilePermission.GROUP_EXECUTE,
+            PosixFilePermission.OTHERS_READ,
+            PosixFilePermission.OTHERS_WRITE,
+            PosixFilePermission.OTHERS_EXECUTE));
+
+        try (UnixRouteListener listener = new UnixRouteListener(EndpointSpec.unix(unsafeParent.resolve("listener.sock"), false));) {}
     }
 
     @Test
@@ -322,6 +343,14 @@ public class UnixRouteTransportTest {
             testDirectory = Files.createTempDirectory("ttunnel-uds-test");
         }
         return testDirectory.resolve(name);
+    }
+
+    private static void setPermissionsOrSkip(final Path path, final Set<PosixFilePermission> permissions) throws IOException {
+        try {
+            Files.setPosixFilePermissions(path, permissions);
+        } catch (UnsupportedOperationException e) {
+            Assume.assumeNoException(e);
+        }
     }
 
     private static void deleteRecursively(final Path path) throws IOException {
