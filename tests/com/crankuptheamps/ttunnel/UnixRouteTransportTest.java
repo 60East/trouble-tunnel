@@ -13,6 +13,7 @@ import java.nio.channels.ServerSocketChannel;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Properties;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -213,10 +214,105 @@ public class UnixRouteTransportTest {
         }
     }
 
+    @Test
+    public void processorDisconnectClosesUnixRouteConnections() throws Exception {
+        final Path socketPath = socketPath("processor-disconnect.sock");
+        final ExecutorService executor = Executors.newSingleThreadExecutor();
+
+        try (UnixRouteListener listener = new UnixRouteListener(EndpointSpec.unix(socketPath, false));) {
+            final Future<RouteConnection> accepted = acceptAsync(executor, listener);
+
+            final RouteConnection clientConnection = new UnixRouteConnector(EndpointSpec.unix(socketPath, false)).connect();
+            final RouteConnection serverConnection = accepted.get(5, TimeUnit.SECONDS);
+
+            try {
+                final ConnectionProcessorImpl processor = new ConnectionProcessorImpl(
+                    clientConnection,
+                    serverConnection,
+                    "processor-disconnect",
+                    null,
+                    new Properties[] {});
+
+                processor.disconnect();
+
+                try {
+                    clientConnection.output().write(new byte[] { 1 });
+                    Assert.fail("expected write to fail after connection close");
+                } catch (IOException expected) {}
+
+                try {
+                    serverConnection.output().write(new byte[] { 1 });
+                    Assert.fail("expected write to fail after connection close");
+                } catch (IOException expected) {}
+            } finally {
+                clientConnection.close();
+                serverConnection.close();
+            }
+        } finally {
+            executor.shutdownNow();
+        }
+    }
+
+    @Test
+    public void routeStopClosesActiveUnixRouteConnections() throws Exception {
+        final Path listenPath = socketPath("route-stop-listen.sock");
+        final Path remotePath = socketPath("route-stop-remote.sock");
+        final ExecutorService executor = Executors.newCachedThreadPool();
+        final Route route = new Route(
+            "route-stop",
+            EndpointSpec.unix(listenPath, false),
+            EndpointSpec.unix(remotePath, false),
+            testDirectory.toFile(),
+            new Properties[] {});
+        final Thread routeThread = new Thread(route);
+
+        try (UnixRouteListener remoteListener = new UnixRouteListener(EndpointSpec.unix(remotePath, false));) {
+            routeThread.start();
+            
+            final long deadline = System.currentTimeMillis() + 5000;
+
+            while (!Files.exists(listenPath) && System.currentTimeMillis() < deadline) {
+                Thread.sleep(10);
+            }
+
+            Assert.assertTrue("timed out waiting for " + listenPath, Files.exists(listenPath));
+
+            final Future<RouteConnection> acceptedRemote = acceptAsync(executor, remoteListener);
+            final RouteConnection clientConnection = new UnixRouteConnector(EndpointSpec.unix(listenPath, false)).connect();
+            final RouteConnection serverConnection = acceptedRemote.get(5, TimeUnit.SECONDS);
+
+            try {
+                clientConnection.output().write(new byte[] { 42 });
+                Assert.assertEquals(42, serverConnection.input().read());
+
+                route.stop();
+                routeThread.join(5000);
+
+                Assert.assertFalse(routeThread.isAlive());
+                Assert.assertEquals(-1, readByteAsync(executor, clientConnection).get(5, TimeUnit.SECONDS).intValue());
+                Assert.assertEquals(-1, readByteAsync(executor, serverConnection).get(5, TimeUnit.SECONDS).intValue());
+            } finally {
+                route.stop();
+                clientConnection.close();
+                serverConnection.close();
+            }
+        } finally {
+            executor.shutdownNow();
+        }
+    }
+
     private Future<RouteConnection> acceptAsync(final ExecutorService executor, final RouteListener listener) {
         return executor.submit(new Callable<RouteConnection>() {
             public RouteConnection call() throws Exception {
                 return listener.accept();
+            }
+        });
+    }
+
+    private Future<Integer> readByteAsync(final ExecutorService executor, final RouteConnection connection) {
+        return executor.submit(new Callable<Integer>() {
+            public Integer call() throws Exception {
+                return connection.input().read();
             }
         });
     }

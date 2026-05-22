@@ -93,10 +93,9 @@ public class Route implements Runnable {
                         info("connecting to remote endpoint: " + remoteEndpoint);
                         remoteConnection = transportFactory.connector(remoteEndpoint).connect();
                         info("remote endpoint connected, constructing connection processor ...");
-                        final ConnectionProcessorImpl proc = new ConnectionProcessorImpl(localConnection.input(),
-                            localConnection.output(),
-                            remoteConnection.input(),
-                            remoteConnection.output(),
+                        final ConnectionProcessorImpl proc = new ConnectionProcessorImpl(
+                            localConnection,
+                            remoteConnection,
                             this.name,
                             this.log_dir,
                             filterConfigs);

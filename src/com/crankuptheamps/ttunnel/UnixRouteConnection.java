@@ -13,28 +13,22 @@ import java.util.Iterator;
 public class UnixRouteConnection implements RouteConnection {
 
     private final SocketChannel channel;
-    private SelectableChannelInputStream input;
-    private SelectableChannelOutputStream output;
+    private final SelectableChannelInputStream input;
+    private final SelectableChannelOutputStream output;
     private boolean closed;
 
     public UnixRouteConnection(final SocketChannel channel) throws IOException {
         this.channel = channel;
         this.channel.configureBlocking(false);
+        this.input = new SelectableChannelInputStream(this.channel);
+        this.output = new SelectableChannelOutputStream(this.channel);
     }
 
-    public synchronized InputStream input() throws IOException {
-        if (input == null) {
-            input = new SelectableChannelInputStream(channel);
-        }
-
+    public InputStream input() throws IOException {
         return input;
     }
 
-    public synchronized OutputStream output() throws IOException {
-        if (output == null) {
-            output = new SelectableChannelOutputStream(channel);
-        }
-
+    public OutputStream output() throws IOException {
         return output;
     }
 

@@ -9,11 +9,39 @@ import java.util.Properties;
 public class ConnectionProcessorImpl implements Runnable, ConnectionProcessor {
 
     private final int id;
+    private final RouteConnection remote;
     private final ConnectionProcessorPipe remote_to_local_pipe;
+    private final RouteConnection local;
     private final ConnectionProcessorPipe local_to_remote_pipe;
     final ConnectionProcessorPipe[] pipes;
     final Thread[] threads;
     final ConnectionLogger logger;
+
+    public ConnectionProcessorImpl(final RouteConnection local,
+                                   final RouteConnection remote,
+                                   final String route_name,
+                                   final File log_dir,
+                                   final Properties[] filterConfigs) throws IOException {
+        this.id = nextId();
+        this.local = local;
+        this.remote = remote;
+        
+        final InputStream localIn = this.local.input();
+        final OutputStream localOut = this.local.output();
+        final InputStream remoteIn = this.remote.input();
+        final OutputStream remoteOut = this.remote.output();
+
+        final FilterFactory filterFactory = new FilterFactory(filterConfigs);
+        logger = route_name != null && log_dir != null ? new ConnectionLoggerImpl(log_dir, route_name, this.id) : new ConsoleConnectionLogger(route_name, this.id);
+        this.remote_to_local_pipe = new ConnectionProcessorPipe(localIn,  filterFactory.getInstances(this), remoteOut, logger, null); // null buffer sisze => default
+        this.local_to_remote_pipe = new ConnectionProcessorPipe(remoteIn, filterFactory.getInstances(this), localOut,  logger, null); // null buffer sisze => default
+        pipes = new ConnectionProcessorPipe[] {
+                remote_to_local_pipe,
+                local_to_remote_pipe,
+        };
+        threads = new Thread[pipes.length];
+        start_logging();
+    }
 
     public ConnectionProcessorImpl(final InputStream localIn,
                                    final OutputStream localOut,
@@ -23,6 +51,9 @@ public class ConnectionProcessorImpl implements Runnable, ConnectionProcessor {
                                    final File log_dir,
                                    final Properties[] filterConfigs) throws IOException {
         this.id = nextId();
+        this.local = null;
+        this.remote = null;
+
         final FilterFactory filterFactory = new FilterFactory(filterConfigs);
         logger = route_name != null && log_dir != null ? new ConnectionLoggerImpl(log_dir, route_name, this.id) : new ConsoleConnectionLogger(route_name, this.id);
         this.remote_to_local_pipe = new ConnectionProcessorPipe(localIn,  filterFactory.getInstances(this), remoteOut, logger, null); // null buffer sisze => default
@@ -63,6 +94,24 @@ public class ConnectionProcessorImpl implements Runnable, ConnectionProcessor {
     public void disconnect() {
         for (ConnectionProcessor pipe : pipes) {
             pipe.disconnect();
+        }
+
+        Exception throwLater = null;
+        
+        try {
+            if (local != null) local.close();
+        } catch (Exception e) {
+            throwLater = e;
+        }
+
+        try {
+            if (remote != null) remote.close();
+        } catch (Exception e) {
+            throwLater = e;
+        }
+
+        if (throwLater != null) {
+            throw new RuntimeException(throwLater);
         }
     }
 
