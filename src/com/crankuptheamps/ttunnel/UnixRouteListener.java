@@ -15,13 +15,16 @@ public class UnixRouteListener implements RouteListener {
 
     public UnixRouteListener(final EndpointSpec endpoint) throws IOException {
         path = endpoint.getPath();
+
         if (path.getParent() != null) {
             Files.createDirectories(path.getParent());
         }
+
         if (Files.exists(path)) {
             if (endpoint.isUnlinkExisting()) {
                 try {
                     BasicFileAttributes attrs = Files.readAttributes(path, BasicFileAttributes.class);
+
                     // If the file is an existing Unix domain socket file, delete it
                     if (attrs.isOther() && !Files.isSymbolicLink(path)) {
                         Files.delete(path);
@@ -35,6 +38,7 @@ public class UnixRouteListener implements RouteListener {
                 throw new IOException("Unix domain socket path already exists: " + path);
             }
         }
+
         channel = ServerSocketChannel.open(StandardProtocolFamily.UNIX);
         channel.bind(UnixDomainSocketAddress.of(path));
     }
@@ -51,4 +55,3 @@ public class UnixRouteListener implements RouteListener {
         }
     }
 }
-

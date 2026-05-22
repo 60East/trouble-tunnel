@@ -26,7 +26,6 @@ public class WanFilter extends Filter {
         super(proc, props);
         requireConfigKey(medianLatencyKey);
         medianLatency = Long.parseLong(props.getProperty(medianLatencyKey));
-
     }
 
     public int filter(int datum) {
@@ -34,6 +33,7 @@ public class WanFilter extends Filter {
             Thread.sleep(medianLatency);
         } catch (InterruptedException ignore) {
         }
+
         return datum;
     }
 
@@ -42,6 +42,7 @@ public class WanFilter extends Filter {
             Thread.sleep(medianLatency);
         } catch (InterruptedException ignore) {
         }
+
         return len;
     }
 

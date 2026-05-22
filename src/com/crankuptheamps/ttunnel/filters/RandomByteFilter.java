@@ -1,6 +1,5 @@
 package com.crankuptheamps.ttunnel.filters;
 
-
 import com.crankuptheamps.ttunnel.ConnectionProcessor;
 
 import java.util.Properties;
@@ -22,6 +21,7 @@ public class RandomByteFilter extends Filter {
         if (probability <= r.nextFloat()) {
             return datum;
         }
+
         return r.nextInt();
     }
 
@@ -29,6 +29,7 @@ public class RandomByteFilter extends Filter {
         for (int i = 0 ; i < len ; ++i) {
             b[off + i] =  (byte)filter(b[off + i]);
         }
+
         return len;
     }
 

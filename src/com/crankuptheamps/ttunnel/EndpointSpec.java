@@ -55,6 +55,7 @@ public class EndpointSpec {
         if (type == Type.TCP) {
             return host == null ? "tcp:" + port : "tcp:" + host + ":" + port;
         }
+
         return "unix:" + path;
     }
 }

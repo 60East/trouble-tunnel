@@ -8,6 +8,7 @@ public class RouteTransportFactory {
         if (endpoint.getType() == EndpointSpec.Type.UNIX) {
             return new UnixRouteListener(endpoint);
         }
+
         return new TcpRouteListener(endpoint);
     }
 
@@ -15,6 +16,7 @@ public class RouteTransportFactory {
         if (endpoint.getType() == EndpointSpec.Type.UNIX) {
             return new UnixRouteConnector(endpoint);
         }
+
         return new TcpRouteConnector(endpoint);
     }
 }

@@ -12,7 +12,6 @@ import java.util.regex.Pattern;
 
 // "action": "remove, replace, halt, pause_egress, pause_ingress, pause",
 
-
 public class SearchFilter extends Filter {
 
     // "action": "remove, replace, halt, pause_egress, pause_ingress, pause",
@@ -46,20 +45,25 @@ public class SearchFilter extends Filter {
         super(connectionProcessor, config);
         requireConfigKey(KEY_ACTION);
         action = config.getProperty(KEY_ACTION);
+
         if (!ACTIONS.contains(action)) {
             throw new Error("unrecognized action: '" + action + "' choose from (" + StringUtils.join(ACTIONS.iterator(), ", ") + ")");
         }
+
         requireConfigKey(KEY_SEARCH_TERM);
         search_term = config.getProperty(KEY_SEARCH_TERM);
+
         if (action.equals(ACTION_REPLACE)) {
             requireConfigKey(KEY_REPLACEMENT);
             replacement = config.getProperty(KEY_REPLACEMENT);
+
             if (replacement.length() != search_term.length()) {
                 throw new Error("search term(" + search_term + ") must be longer than or same length as replacement(" + replacement + ")");
             }
         } else {
             replacement = null;
         }
+
         if (action.equals(ACTION_PAUSE) || action.equals(ACTION_PAUSE_INGRESS) || action.equals(ACTION_PAUSE_EGRESS)) {
             requireConfigKey(KEY_PAUSE_DURATION);
             pause_duration = Long.parseLong(config.getProperty(KEY_PAUSE_DURATION));
@@ -77,6 +81,7 @@ public class SearchFilter extends Filter {
     public int filter(byte[] b, int off, int len) {
         int retval = len;
         final String str = new String(b, off, len);
+
         if (str.indexOf(search_term) != -1) {
             if (action.equals(ACTION_REPLACE)) {
                 final byte[] processed = str.replaceAll(search_term, replacement).getBytes();
@@ -120,6 +125,7 @@ public class SearchFilter extends Filter {
         } else {
             getConnectionProcessor().get_logger().warn("unrecognized action: " + action);
         }
+
         return retval;
     }
 

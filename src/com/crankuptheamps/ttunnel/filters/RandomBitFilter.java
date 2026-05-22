@@ -1,6 +1,5 @@
 package com.crankuptheamps.ttunnel.filters;
 
-
 import com.crankuptheamps.ttunnel.ConnectionProcessor;
 
 import java.util.Arrays;
@@ -18,6 +17,7 @@ public class RandomBitFilter extends Filter {
         super(proc, props);
         requireConfigKey(probability_key);
         probability = Float.parseFloat(props.getProperty(probability_key));
+
         for (int i = 0 ; i < table.length ; ++i) {
             for (int j = 24 ; j < 32 ; ++j) {
                 table[i][j-24] = flip_bit_at(i, j);
@@ -27,6 +27,7 @@ public class RandomBitFilter extends Filter {
 
     public int filter(final int datum) {
         int ret = datum;
+
         if (probability > r.nextFloat()) {
             try {
                 ret = table[datum][r.nextInt(8)];
@@ -34,6 +35,7 @@ public class RandomBitFilter extends Filter {
                 throw e;
             }
         }
+
         return ret;
     }
 
@@ -41,17 +43,20 @@ public class RandomBitFilter extends Filter {
         for (int i = 0 ; i < len ; ++i) {
             b[off + i] =  (byte)filter(b[off + i]);
         }
+
         return len;
     }
 
     int[][] get_table_copy_for_unit_testing() {
-         final int[][] t = new int[256][8];
-         for (int i = 0 ; i < t.length ; ++i) {
-		 					for (int j = 0 ; j < t[i].length ; ++j) {
-							 	t[i][j] = table[i][j];
-							}
-         }
-         return t;
+        final int[][] t = new int[256][8];
+
+        for (int i = 0 ; i < t.length ; ++i) {
+            for (int j = 0 ; j < t[i].length ; ++j) {
+                t[i][j] = table[i][j];
+            }
+        }
+
+        return t;
     }
 
     public static int flip_bit_at(final int val, final int at_index) {
@@ -64,9 +69,11 @@ public class RandomBitFilter extends Filter {
 
     static String getZeroPaddedBinaryString(final int i) {
         String s = Integer.toBinaryString(i);
+
         while (s.length() < 32) {
             s = "0" + s;
         }
+
         return s;
     }
 }

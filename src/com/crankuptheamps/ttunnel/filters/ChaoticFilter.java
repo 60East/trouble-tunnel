@@ -25,6 +25,7 @@ public class ChaoticFilter extends Filter {
             Thread.sleep(r.nextInt(1000));
         } catch (InterruptedException ignore) {
         }
+
         return datum;
     }
 
@@ -33,6 +34,7 @@ public class ChaoticFilter extends Filter {
             Thread.sleep(r.nextInt(1000));
         } catch (InterruptedException ignore) {
         }
+
         return len;
     }
 

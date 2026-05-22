@@ -26,6 +26,7 @@ public class UnixRouteConnection implements RouteConnection {
         if (input == null) {
             input = new SelectableChannelInputStream(channel);
         }
+
         return input;
     }
 
@@ -33,6 +34,7 @@ public class UnixRouteConnection implements RouteConnection {
         if (output == null) {
             output = new SelectableChannelOutputStream(channel);
         }
+
         return output;
     }
 
@@ -40,9 +42,10 @@ public class UnixRouteConnection implements RouteConnection {
         if (closed) {
             return;
         }
-        closed = true;
 
+        closed = true;
         IOException thrown = null;
+
         try {
             if (input != null) {
                 input.close();
@@ -50,6 +53,7 @@ public class UnixRouteConnection implements RouteConnection {
         } catch (IOException e) {
             thrown = e;
         }
+
         try {
             if (output != null) {
                 output.close();
@@ -59,6 +63,7 @@ public class UnixRouteConnection implements RouteConnection {
                 thrown = e;
             }
         }
+
         try {
             channel.close();
         } catch (IOException e) {
@@ -66,6 +71,7 @@ public class UnixRouteConnection implements RouteConnection {
                 thrown = e;
             }
         }
+
         if (thrown != null) {
             throw thrown;
         }
@@ -94,15 +100,18 @@ public class UnixRouteConnection implements RouteConnection {
             }
 
             final ByteBuffer dst = ByteBuffer.wrap(b, off, len);
+
             while (true) {
                 final int read = channel.read(dst);
+
                 if (read != 0) {
                     return read;
                 }
+
                 waitForRead();
             }
         }
-        
+
         public void close() throws IOException {
             try {
                 selector.close();
@@ -114,7 +123,9 @@ public class UnixRouteConnection implements RouteConnection {
         private void waitForRead() throws IOException {
             try {
                 while (selector.select() == 0) { }
+
                 final Iterator<SelectionKey> keys = selector.selectedKeys().iterator();
+
                 while (keys.hasNext()) {
                     keys.next();
                     keys.remove();
@@ -143,8 +154,10 @@ public class UnixRouteConnection implements RouteConnection {
 
         public void write(final byte[] b, final int off, final int len) throws IOException {
             final ByteBuffer src = ByteBuffer.wrap(b, off, len);
+
             while (src.hasRemaining()) {
                 final int written = channel.write(src);
+
                 if (written == 0) {
                     waitForWrite();
                 }
@@ -162,7 +175,9 @@ public class UnixRouteConnection implements RouteConnection {
         private void waitForWrite() throws IOException {
             try {
                 while (selector.select() == 0) { }
+
                 final Iterator<SelectionKey> keys = selector.selectedKeys().iterator();
+
                 while (keys.hasNext()) {
                     keys.next();
                     keys.remove();

@@ -10,6 +10,7 @@ public class TcpRouteListener implements RouteListener {
 
     public TcpRouteListener(final EndpointSpec endpoint) throws IOException {
         serverSocket = new ServerSocket();
+
         if (endpoint.getHost() == null) {
             serverSocket.bind(new InetSocketAddress(endpoint.getPort()));
         } else {
