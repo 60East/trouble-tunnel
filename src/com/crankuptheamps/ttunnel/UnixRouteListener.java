@@ -23,10 +23,10 @@ public class UnixRouteListener implements RouteListener {
             Files.createDirectories(path.getParent());
         }
 
+        requirePrivateParentDirectory(path);
+        
         if (Files.exists(path)) {
-            if (endpoint.isUnlinkExisting()) {
-                requirePrivateParentDirectory(path);
-                
+            if (endpoint.isUnlinkExisting()) {    
                 try {
                     BasicFileAttributes attrs = Files.readAttributes(path, BasicFileAttributes.class);
 

@@ -118,14 +118,14 @@ New configurations may use explicit endpoint objects instead:
       },
 
       {"name": "uds-to-tcp",
-       "listen": {"type": "unix", "path": "/tmp/ttunnel-in.sock", "unlink_existing": true},
+       "listen": {"type": "unix", "path": "/tmp/ttunnel/ttunnel-in.sock", "unlink_existing": true},
        "remote": {"type": "tcp", "host": "B", "port": 9004},
        "log_dir": "log-uds"
       },
 
       {"name": "tcp-to-uds",
        "listen": {"type": "tcp", "port": 9005},
-       "remote": {"type": "unix", "path": "/tmp/backend.sock"},
+       "remote": {"type": "unix", "path": "/tmp/ttunnel/backend.sock"},
        "log_dir": "log-tcp-uds"
       }
     ]
@@ -134,7 +134,8 @@ Unix domain socket support requires Java 17 and an operating system that
 supports filesystem Unix domain sockets. TT removes a Unix listener socket path
 when the route stops. If the path already exists at startup, TT fails unless
 both `unlink_existing` is set to `true` on the Unix listener endpoint and
-the path is a Unix listener socket path.
+the path is a Unix listener socket path. Additionally, the Unix socket should
+exist in a private subdirectory that is not group/others writable.
 
 Need a formal definition? The JSON file contains an array. Each element of the
 array is a map that defines a route. A route needs a `name`, either `listen_on`
