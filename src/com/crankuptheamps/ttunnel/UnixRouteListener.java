@@ -10,6 +10,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.PosixFileAttributes;
 import java.nio.file.attribute.PosixFilePermission;
 import java.util.Set;
+import java.util.EnumSet;
 
 public class UnixRouteListener implements RouteListener {
 
@@ -46,6 +47,17 @@ public class UnixRouteListener implements RouteListener {
 
         channel = ServerSocketChannel.open(StandardProtocolFamily.UNIX);
         channel.bind(UnixDomainSocketAddress.of(path));
+
+        final Set<PosixFilePermission> ownerOnly = EnumSet.of(
+            PosixFilePermission.OWNER_READ,
+            PosixFilePermission.OWNER_WRITE
+        );
+
+        try {
+            Files.setPosixFilePermissions(path, ownerOnly);
+        } catch (UnsupportedOperationException e) {
+            throw new IOException("Cannot set Unix domain socket permissions: " + path, e);
+        }
     }
 
     public RouteConnection accept() throws IOException {

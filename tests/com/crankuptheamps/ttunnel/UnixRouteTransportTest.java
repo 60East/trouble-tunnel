@@ -214,6 +214,19 @@ public class UnixRouteTransportTest {
             executor.shutdownNow();
         }
     }
+    
+    @Test
+    public void socketHasOwnerPermissions() throws Exception {
+        final Path socketPath = socketPath("owner-permissions.sock");
+        
+        try (UnixRouteListener listener = new UnixRouteListener(EndpointSpec.unix(socketPath, false));) {
+            Set<PosixFilePermission> perms = Files.getPosixFilePermissions(socketPath);
+
+            Assert.assertEquals("Should have only 2 permissions set.", 2, perms.size());
+            Assert.assertTrue("Should have owner write.", perms.contains(PosixFilePermission.OWNER_WRITE));
+            Assert.assertTrue("Should have owner read.", perms.contains(PosixFilePermission.OWNER_READ));
+        }
+    }
 
     @Test
     public void connectionCloseIsIdempotent() throws Exception {

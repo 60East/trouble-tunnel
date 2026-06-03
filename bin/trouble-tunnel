@@ -3,14 +3,14 @@ HERE=`dirname $0`
 JAR=`find $HERE -type f -name trouble-tunnel-*.jar`
 if [ -e "$JAR" ]; then
     java -jar $JAR $*
-    exit 0
+    exit $?
 fi
 
-JAR=`find ./dist -type f -name trouble-tunnel-*.jar`
+JAR=`find $HERE/../dist -type f -name trouble-tunnel-*.jar`
 
 if [ -e "$JAR" ]; then
     java -jar $JAR $*
-    exit 0
+    exit $?
 else
     echo "could not find trouble tunnel JAR" 1>&2
     exit 1
